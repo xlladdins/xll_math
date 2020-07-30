@@ -1,10 +1,11 @@
 #!/usr/bin/python3
 
 import requests
-from lxml import html
+import lxml.etree as etree
 
-reference = "https://docs.microsoft.com/en-us/cpp/c-runtime-library/reference/"
-xmain = "/html/body/div[2]/div/section/div/div[1]/main"
+#url = "https://docs.microsoft.com/en-us/cpp/c-runtime-library/reference/"
+#url = "https://raw.githubusercontent.com/MicrosoftDocs/cpp-docs/master/docs/c-runtime-library/reference/"
+url = "https://github.com/MicrosoftDocs/cpp-docs/blob/master/docs/c-runtime-library/reference/"
 
 xll_args = {
 	'int': 'XLL_SHORT',
@@ -20,7 +21,7 @@ AddInX xai_{name}(
 	}})
 	.Category(X_("{cat}"))
 	.FunctionHelp(X_("{fh}"))
-	.HelpTopic(X_("{reference}{name}!0"))
+	.HelpTopic(X_("{url}{name}!0"))
 );
 {ret} WINAPI xll_{name}(args...)
 {{
@@ -31,18 +32,18 @@ AddInX xai_{name}(
 '''
 
 if __name__ == '__main__':
-	ldexp = requests.get(reference + "ldexp")
-	page = html.fromstring(ldexp.content)
-	#main = page.xpath('//*[@id="main"]/text()')
-	fh = page.xpath(xmain + '/p[1]/text()')
-	#/html/body/div[2]/div/section/div/div[1]/main/p[3]
-	#decl = page.xpath(xmain + '/pre[1]/code/text()')
-	param = page.xpath(xmain + '/p[br]/text()')
-	#param = page.xpath(xmain + '//*/text()')
-	#/html/body/div[2]/div/section/div/div[1]/main/p[2]/em
-	#/html/body/div[2]/div/section/div/div[1]/main/p[2]
-	#/html/body/div[2]/div/section/div/div[1]/main/p[3]/em
+	ldexp = requests.get(url + "ldexp.md")
+	# if r.status == 200: ...
+	#print(ldexp.content.decode('utf-8'))
+	parser = etree.HTMLParser(recover=True)
+	page = etree.HTML(ldexp.content, parser)
+	article = '//article'
+	print(etree.tostring(page, pretty_print=True).decode('utf-8'))
+	#/html/body/div[4]/div/main/div[2]/div/div[3]/div[2]/article/h3
+	#for i in page.iter():
+	#	print(i)
+	#print(page)
 	#print(fh)
 	#print(decl)
-	print(param)
+	#print(param)
 	#print(addin('CMATH', 'ldexp', 'double', fh[0]))
