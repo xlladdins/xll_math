@@ -6,10 +6,11 @@
 import requests
 import lxml.etree as etree
 
-#url = "https://docs.microsoft.com/en-us/cpp/c-runtime-library/reference/"
+ref = "https://docs.microsoft.com/en-us/cpp/c-runtime-library/reference/"
 #url = "https://raw.githubusercontent.com/MicrosoftDocs/cpp-docs/master/docs/c-runtime-library/reference/"
 url = "https://github.com/MicrosoftDocs/cpp-docs/blob/master/docs/c-runtime-library/reference/"
 
+// C to Excel argument codes
 xll_args = {
 	'int': 'XLL_SHORT',
 	'double': 'XLL_DOUBLEX'
@@ -24,7 +25,7 @@ AddInX xai_{name}(
 	}})
 	.Category(X_("{cat}"))
 	.FunctionHelp(X_("{fh}"))
-	.HelpTopic(X_("{url}{name}!0"))
+	.HelpTopic(X_("{ref}{name}!0"))
 );
 {ret} WINAPI xll_{name}(args...)
 {{
