@@ -32,11 +32,18 @@ entity `&amp;` is used to escape the ampersand character.
 The top level element is called the _root_ of the document. It is a _tree_
 where the elements are the _nodes_ and _edges_ connect each element to
 the elements in its content. The order of elements in the content
-provide a _tree ordering_.
+provide a _tree ordering_. This is called _document order_.
 
-The (immediate) _children_ of an element are the elements its content.
-An element is the (immediate) _parent_ of each of its children.
+The _children_ of an element are the elements its content.
+An element is the _parent_ of each of its children.
 The children of a node are _siblings_.
+
+Children are _immediate _decendents_ of their parent.
+A parent is the _immediate ancestor_ of its children.
+The _decendents_ of an element are defined by the property that
+their immediate ancestor is also a decendent of the element.
+The _ancestors_ of an element are defined by the property that
+their immediate decendents are also ancestors of the element.
 
 ## XPath
 
@@ -73,16 +80,42 @@ The domain of a map is a set of strings.
 ### Path Expression
 
 A _path expression_ consists of a series of one or more _steps_.
-Each step specifies a successive refinement of nodes to be addressed
-and acts in the _context_ selected by the previous steps.
+Each step specifies successive refinements of nodes to be addressed
+and acts in the _context_ selected by the previous steps. A context
+is a sequence of nodes.
 
-Path expressions can be either _relative_ or _absolute_.
 ```
-	PathExpr ::= RelativePathExpr | "/" RelativePathExpr? | "//" RelativePathExpr
+	PathExpr ::= RelativePathExpr | '/' RelativePathExpr? | '//' RelativePathExpr
 	RelativePathExpr ::= StepExp (('/' | '//') StepExpr)*
 ```
 where question mark (`?`) indicates exactly zero or one occurence and we use
-parenthesis `()` for grouping. They are not part of the expression.
-If _S_ is a step expression then _S_, /,  /_S_, and are //_S_
+parenthesis `()` for grouping. They don't show up in expression.
+
+If _E_ is a relative path expression then '_E_', '/',  '/_E_', and '//_E_'
 are (the only) valid path expressions. Permissable relative path expressions are
-_S_, /_S_/_T_, and //_S_/_T_//_U_ where _T_ and _U_ are step expressions.
+'_S_', '/_S_/_T_', and '//_S_/_T_//_U_' where _S_, _T_, and _U_ are step expressions.
+
+Steps are separated by '/' or '//'.
+Path expressions starting with '/' or '//' are abbreviations for one
+or more initial steps. A '/' at the beginning of a path expression selects the
+document root. A '//' at the beginning of a path
+expression selects (the sequence of) all decendents of the root node, including
+the root node.
+
+A relative path expression selects the sequence of nodes that are specified by the
+steps in the path.
+
+#### Step
+
+Each step generates a sequence of items from the context provided by
+the previous step and then filters the sequence by
+zero or more predicates.
+
+```
+	StepExpr      ::= PostfixExpr | AxisStep
+	AxisStep      ::= ReverseStep | ForwardStep) PredicateList
+	ForwardStep   ::= ForwardAxis NodeTest) | AbbrevForwardStep
+	ReverseStep   ::= ReverseAxis NodeTest) | AbbrevReverseStep
+	PredicateList ::= Predicate*
+```
+
