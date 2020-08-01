@@ -83,6 +83,6 @@ Path expressions can be either _relative_ or _absolute_.
 ```
 where question mark (`?`) indicates exactly zero or one occurence and we use
 parenthesis `()` for grouping. They are not part of the expression.
-If _S_ is a step expression then _S_, `/`,  `/`_S_, and are `//`_S_
+If _S_ is a step expression then _S_, /,  /_S_, and are //_S_
 are (the only) valid path expressions. Permissable relative path expressions are
-_S_, `/`_S_`/`_T_
+_S_, /_S_/_T_, and //_S_/_T_//_U_ where _T_ and _U_ are step expressions.
