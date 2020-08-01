@@ -40,8 +40,8 @@ if __name__ == '__main__':
 	#print(ldexp.content.decode('utf-8'))
 	parser = etree.HTMLParser(recover=True)
 	page = etree.HTML(ldexp.content, parser)
-	article = '//article'
 	print(etree.tostring(page, pretty_print=True).decode('utf-8'))
+	article = '//article'
 	#/html/body/div[4]/div/main/div[2]/div/div[3]/div[2]/article/h3
 	#for i in page.iter():
 	#	print(i)
