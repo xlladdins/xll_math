@@ -16,8 +16,8 @@ following BNF grammar:
 	value     ::= '"' char* '"'
 ```
 where literal tokens are enclose in single quotes (`'`), vertical
-bar (`|\) indicates alternatives, asterisk (`*`) means zero or more
-occurences, and plus (`+`) one or more.  We use question mark (`?`)
+bar (`|`) indicates alternatives, asterisk (`*`) means zero or more
+occurences, and plus (`+`) one or more.  We will use question mark (`?`)
 to indicate exactly zero or one occurence.
 
 In a _valid_ XML document the name of each start-tag must be the same as
