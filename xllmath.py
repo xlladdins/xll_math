@@ -16,33 +16,49 @@ ref = "https://docs.microsoft.com/en-us/cpp/c-runtime-library/reference/"
 url = "https://github.com/MicrosoftDocs/cpp-docs/blob/master/docs/c-runtime-library/reference/"
 
 # simple C function prototype parser
-tok = re.compile(r'\s*(\w+)\s*([\( ,\)])')
 def parse_cdecl(text):
 	cdecl = {}
 	cdecl['type'] = []
 	cdecl['name'] = []
-	iter = tok.finditer(text)
+	
+	# remove comments
+	text = re.sub(r"\s*/\*(.|[\r\n])*?\*/", " ", text, 0, re.MULTILINE)
+	text = re.sub(r"\s*//.*[\r\n]", " ", text, 0, re.MULTILINE)
+	iter = re.compile(r'\s*(\w+|;)\s*([\( ,\)]|(?!\s)\B)').finditer(text)
 
 	i = next(iter)
+	print (i)
+	print (f'>{i[1]}<>{i[2]}<')
 	assert (i[2] == ' ')
 	cdecl['return'] = i[1]
 
 	i = next(iter)
+	print (i)
 	assert (i[2] == '(')
 	cdecl['symbol'] = i[1]
 
 	for i in iter:
+		print (i)
 		assert (i[2] == ' ')
 		cdecl['type'].append(i[1])
 		i = next(iter)
+		print (i)
 		assert (i[2] == ',' or i[2] == ')')
 		cdecl['name'].append(i[1])
 		if (i[2] == ')'):
+			i = next(iter);
+			print(f'>{i[0]}<')
+			assert (i[0] == ';')
 			break
 
 	return cdecl
 
-#print(parse_cdecl('int foo(double bar, float baz);'))
+def test_parse_cdecl():
+	c1 = parse_cdecl('int foo(double bar, float baz);')
+	c2 = parse_cdecl('int foo(double bar /*a comment*/, float baz);')
+	assert (c1 == c2)
+	c3 = parse_cdecl('int foo(double bar /*a comment*/, \nfloat // comment\n baz); // inline comment')
+	assert (c1 == c3)
 
 # strip out html tags
 def strip_html(text):
