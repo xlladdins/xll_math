@@ -99,23 +99,65 @@ Steps are separated by '/' or '//'.
 Path expressions starting with '/' or '//' are abbreviations for one
 or more initial steps. A '/' at the beginning of a path expression selects the
 document root. A '//' at the beginning of a path
-expression selects (the sequence of) all decendents of the root node, including
-the root node.
+expression selects the root and all decendents.
 
 A relative path expression selects the sequence of nodes that are specified by the
 steps in the path.
 
 #### Step
 
-Each step generates a sequence of items from the context provided by
-the previous step and then filters the sequence by
-zero or more predicates.
+Each step generates a sequence of items from the context provided by the
+previous step and then filters the sequence by zero or more predicates.
 
 ```
 	StepExpr      ::= PostfixExpr | AxisStep
-	AxisStep      ::= ReverseStep | ForwardStep) PredicateList
-	ForwardStep   ::= ForwardAxis NodeTest) | AbbrevForwardStep
-	ReverseStep   ::= ReverseAxis NodeTest) | AbbrevReverseStep
+	AxisStep      ::= (ReverseStep | ForwardStep) PredicateList
+	ForwardStep   ::= ForwardAxis NodeTest
+	ReverseStep   ::= ReverseAxis NodeTest
 	PredicateList ::= Predicate*
 ```
+
+Postfix expressions select primary expressions. These are usually not nodes.
+
+```
+	PostfixExpr  ::= PrimaryExpr (Predicate | ArgumentList | Lookup)*
+	Predicate    ::= '[' Expr ']'
+	ArgumentList ::= '(' (Argument (',' Argument)*)? ')'
+```
+
+Primary expressions are the basic primitives of XPath. They can be
+_literals_, _variable references_, _context item expressions_, and _function calls_.
+They may be enclosed in parentheses to control the order in which they are evaluated.
+
+An _axis step_ selects nodes from the current context, performs a test on
+each of the nodes, and optionally filters those based on zero or more predicates.
+
+A _forward axis_ looks a the current node and its attributes, siblings
+after the current node (using document order), and decendents. 
+A _reverse axis_ looks at siblings before the current node and ancestors
+(optionally includng the current node).
+
+The axes have names. For forward axes 'child' specifies all children of the current node,
+'descendent' is the transitive closure of all children, 'attribute' is the sequence
+of attributes associated with the current node, ...
+For reverse axes 'parent' is the (unique) parent of the current node or empty if
+the node does not have a parent, ...
+
+There are abbreviations for the most common axes. The 'self' axis is '.', the
+'parent' is '..', and '@' selects 'attribute's of the current node.
+
+A node test is a filter acting on the name or kind of a node. They are separated
+from the axis name by a '::' token.
+```
+	NodeTest ::= KindTest | NameTest
+	NameTest ::= EQName | Wildcard
+	Wildcard ::= '*' | (NCName ':*') | ('*:' NCName) | (BracedURILiteral '*')
+	EQName   ::= QName | URIQualifiedName
+```
+
+A name test matches the node having the same name or all nodes if the wildcard is '*'.
+If no node matches then the result is empty.
+
+
+Abbreviated syntax...
 
