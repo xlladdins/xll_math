@@ -5,33 +5,48 @@ following BNF grammar:
 
 ```
 	document  ::= prolog element
-	prolog    ::= '<?xml version="1.0" encoding="UTF-8"?>'
+	prolog    ::= '<?xml version="' version '" encoding="' encoding '"?>'
 	element   ::= empty-tag | start-tag content end-tag
 	empty-tag ::= '<' name attribute* '/>'
 	start-tag ::= '<' name attribute* '>'
-	content   ::= element*
+	content   ::= (element | string | entity | comment)*
 	end-tag   ::= '</' name '>'
-	name      ::= char+
-	attribute ::= name '=' value
-	value     ::= '"' char* '"'
+	name      ::= name-char+
+	name-char ::= (letter | digit | '_' | ':')
+	attribute ::= name '=' '"' string '"'
+	string    ::= nice-char*
+	entity    ::= '&' name ';'
+	comment   ::= '<!--' string '-->'
 ```
-where literal tokens are enclose in single quotes (`'`), vertical
-bar (`|`) indicates alternatives, asterisk (`*`) means zero or more
+where literal tokens are enclose in single quotes (`'`), vertical bar
+(`|`) indicates alternatives, parentheses (`()`) are used for grouping
+and do not occur in the document, asterisk (`*`) means zero or more
 occurences, and plus (`+`) one or more.
 
-In a _valid_ XML document the name of each start-tag must be the same as
-the name of the correponding end-tag.  This definition ignores (important)
-concepts like _reference_, _character data_, _processing instructions_,
-and _comments_ that are also valid content of an element.
+The usual prolog version is `1.0` and encoding `UTF-8`.
 
-Not every sequence of characters is a valid name. For example, names starting
-with an ampersand (`&`) are called _entities_ and are often used to escape
-special characters or to represent non-ASCII characters. For example, the
-entity `&amp;` is used to escape the ampersand character.
+Content can also have character data and processing instructions.
+They can be used to embed additional data and information into
+a document. We omit these for simplicity.
+
+Names can't start with digits and sometimes contain a period (`.`).
+
+Note that the characters `<`, `>`, and `&` have
+special meaning. We call characters other than these _nice_.
+The entities `&lt;`, `&gt;`, and `&amp;` can be used to include
+special charaters in a string.
+
+Comments cannot be nested and the string must not start with or
+end with `-`.
+
+Strings are actually messier than what is specified above.
+
+In a _valid_ XML document the name of each start-tag must be the same as
+the name of the correponding end-tag.
 
 The top level element is called the _root_ of the document. It is a _tree_
 where the elements are the _nodes_ and _edges_ connect each element to
-the elements in its content. The order of elements in the content
+its content. The order of elements in the content
 provide a _tree ordering_. This is called _document order_.
 
 The _children_ of an element are the elements its content.
