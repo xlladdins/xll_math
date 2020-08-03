@@ -36,15 +36,16 @@ special meaning. We call characters other than these _nice_.
 The entities `&lt;`, `&gt;`, and `&amp;` can be used to include
 special charaters in a string.
 
-Comments cannot be nested and the string must not start with or
-end with `-`.
+Comments cannot be nested and the string must not start or
+end with the minus character `-`.
 
-Strings are actually messier than what is specified above.
+Strings are messier than what is specified above.
 
 In a _valid_ XML document the name of each start-tag must be the same as
 the name of the correponding end-tag.
 
-The top level element is called the _root_ of the document. It is a _tree_
+A document is a _tree_.
+The top level element is called the _root_
 where the elements are the _nodes_ and _edges_ connect each element to
 its content. The order of elements in the content
 provide a _tree ordering_. This is called _document order_.
@@ -68,13 +69,14 @@ simple _data model_.
 
 ### Data Model
 
-An _item_ in the data model is either a _node_, _function_, or _atomic
-value_.  Every XML document (or subdocument) is a node. Functions can be
-_called_ given values function _parameters_ (arguments of the function)
-belonging to the _domain_ of the function.  The body of the function
-_implementats_ how the parameter values are converted to the _result_
-of the function call.  Atomic values can have _type_ string, boolean,
-integer, number, date, etc.
+An _item_ in the data model is either a _node_, _function_,
+or _atomic value_. There are seven kinds of nodes: _document_,
+_element_, _attribute_, _text_, _namespace_, _comment_, and _processing
+instruction_. Functions can be _called_ given values for _parameters_
+(arguments of the function) belonging to the _domain_ of the function.
+The body of the function _implementats_ how the parameter values are
+converted to the _result_ of the function call.  Atomic values can have
+_type_ string, boolean, integer, floating point number, date, etc.
 
 A _sequence_ is an ordered list of zero or more items. The _empty sequence_
 contains no items. A sequence containing
@@ -91,6 +93,18 @@ keyed lists, or objects (as in JSON).
 The domain of an an array is a set of positive integers
 _{1,..,n}_ where _n_ is the _size_ of the array.
 The domain of a map is a set of strings.
+
+#### Accessor
+
+_Accessors_ return information about nodes.
+
+The _attribute_ accessor returns the attributes of a node.
+It returns a sequence of zero or more attributes.
+
+The _children_ acc...
+
+
+Document nodes encapsulate XML documents.
 
 ### Path Expression
 
