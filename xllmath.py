@@ -12,37 +12,46 @@ from lxml.html.clean import clean_html
 # Excel function category
 category = 'cmath'
 
-# Nice documentation
+# Official documentation
 ref = "https://docs.microsoft.com/en-us/cpp/c-runtime-library/reference/"
 # Markdown documentation
 url = "https://github.com/MicrosoftDocs/cpp-docs/blob/master/docs/c-runtime-library/reference/"
 
 # simple C function prototype parser
 # parse 'ret sym(t1 n1, ..., tk nk);'
-# to {return: ret, symbol: sym, type: [t1, ..., tk], name: [n1, ... nk]}
-cre = re.compile(r"/\*.*?\*/", re.MULTILINE) # C comments (does not handle nested comments
-cppre = re.compile(r"//.*\Z", re.MULTILINE) # C++ comments
+# to {return: ret, symbol: sym, args: "t1 n1, ..., tk nk", type: [t1, ..., tk], name: [n1, ... nk]}
+
+# C comments (does not handle nested comments
+cre = re.compile(r"/\*.*?\*/", re.MULTILINE)
+# C++ comments
+cppre = re.compile(r"//.*$", re.MULTILINE)
 def parse_cdecl(text):
-	cdecl = {}
-	cdecl['type'] = []
-	cdecl['name'] = []
-	
 	# remove C comments (does not work when nested)
-	text = cre.sub(r"/\*.*?\*/", "", text, 0, re.MULTILINE|re.DOTALL)
+	text = re.sub(cre, "", text)
 	# remove C++ comments
-	text = re.sub(r"//.*\Z", "", text, 0, re.MULTILINE)
-	cdecl = re.compile(r"[\s\n\r\(\)]+").split(text)
-	# whitespace
-	text = text.split().join(' ')
+	text = re.sub(cppre, "", text)
+	text = re.sub(r"\s*([\(,;\)])\s*", r"\1", text)
+	s = re.compile(r"[\(\)]").split(text)
+
+	#assert len(s) == 3
+	assert s[2][0] == ';'
+
+	cdecl = dict(zip(['return', 'symbol', 'args'], s[0].split() + [s[1]]))
+	cdecl['type'] = [x.split(' ')[0] for x in cdecl['args'].split(', ')]
+	cdecl['name'] = [x.split(' ')[1] for x in cdecl['args'].split(', ')]
 
 	return cdecl
 
 def test_parse_cdecl():
 	c1 = parse_cdecl('int foo(double bar, float baz);')
-	c2 = parse_cdecl('int foo(double bar /*a comment*/, float baz);')
-#	assert (c1 == c2)
+	c2 = parse_cdecl('int foo(double bar /*a comment*/, float baz) 	;')
+	assert (c1 == c2)
 	c3 = parse_cdecl('int foo(double bar /*a comment*/, \nfloat // comment\n baz); // inline comment')
-#	assert (c1 == c3)
+	assert (c1 == c3)
+	c4 = parse_cdecl('int foo(double bar /*a comment*/, \nfloat // comment\n baz);\n')
+	assert (c1 == c4)
+
+test_parse_cdecl()
 
 # strip out html tags
 def strip_html(text):
@@ -101,7 +110,7 @@ if __name__ == '__main__':
 	req = requests.get(url + "ldexp.md")
 	assert (req.status_code == 200)
 	# if r.status == 200: ...
-	print(req.content.decode('utf-8'))
+	#print(req.content.decode('utf-8'))
 	parser = etree.HTMLParser(recover=True)
 	page = etree.HTML(req.content, parser)
 	#print(etree.tostring(page, pretty_print=True).decode('utf-8'))
@@ -109,11 +118,6 @@ if __name__ == '__main__':
 	args = []
 #<p><em>x</em>, <em>y</em><br>
 #Floating-point values.</p>
-
-#!!!
-#s/<p><em>(.*)</em>, <em>(.*)</em><br>\n(.*)</p>
-# /<p><em>\1</em><br>\3\n</p>\n<p><em>\2</em><br>\n\3</p>
-#!!! or maybe just parse the html
 
 #<p><em>x</em><br>
 #Floating-point value.</p>
@@ -135,7 +139,7 @@ if __name__ == '__main__':
 
 	syntax = page.xpath('//h2[text()="Syntax"]/following-sibling::div[1]');
 	decl = strip_html(etree.tostring(syntax[0]).decode('utf-8'))
-	#print (f'decl: {decl}')
+	print (f'decl: {decl}')
 	cdecl = parse_cdecl(decl)
 	print(cdecl)
 	print(args)
