@@ -9,14 +9,15 @@ following BNF grammar:
 	element   ::= empty-tag | start-tag content end-tag
 	empty-tag ::= '<' name attribute* '/>'
 	start-tag ::= '<' name attribute* '>'
-	content   ::= (element | string | entity | comment)*
+	content   ::= (element | text | entity | comment)*
 	end-tag   ::= '</' name '>'
-	name      ::= name-char+
-	name-char ::= (letter | digit | '_' | ':')
-	attribute ::= name '=' '"' string '"'
-	string    ::= nice-char*
+	name      ::= (letter | '_' | ':') name-char*
+	name-char ::= (letter | '_' | ':' | digit | '.' | '-')
+	attribute ::= name '=' value
+	text      ::= nice-char*
+	value     ::= '"' text '"'
 	entity    ::= '&' name ';'
-	comment   ::= '<!--' string '-->'
+	comment   ::= '<!--' text '-->'
 ```
 where literal tokens are enclose in single quotes (`'`), vertical bar
 (`|`) indicates alternatives, parentheses (`()`) are used for grouping
@@ -29,19 +30,25 @@ Content can also have character data and processing instructions.
 They can be used to embed additional data and information into
 a document. We omit these for simplicity.
 
-Names can't start with digits and sometimes contain a period (`.`).
+Names for tags specify the element _type_.
+If the element is an `empty-tag` it contains no children,
+otherwise the content of the element are its _children_.
 
-Note that the characters `<`, `>`, and `&` have
-special meaning. We call characters other than these _nice_.
-The entities `&lt;`, `&gt;`, and `&amp;` can be used to include
-special charaters in a string.
+Note that the characters `<`, `>`, `&`, `'`, and `"` have special
+meaning in XML. We call characters other than these _nice_.  (This is
+not standard W3 notation. The full story for allowable text is messy.)
+The entities `&lt;`, `&gt;`, `&amp;`, `&apos;`, and `&quot;` can be
+used to include (_escape_) special characters in text. Text can contain
+non-nice characters after the initial character.
 
 Comments cannot be nested and the string must not start or
 end with the minus character `-`.
 
-Strings are messier than what is specified above.
+Text is intermingled character data and _markup_. Markup always starts
+with `<` and ends with `>` or starts with `&` and ends with `;`.
+Any text that is not markup is character data.
 
-In a _valid_ XML document the name of each start-tag must be the same as
+In a _well-formed_ XML document the name of each start-tag must be the same as
 the name of the correponding end-tag.
 
 A document is a _tree_.
@@ -60,6 +67,13 @@ The _decendents_ of an element are defined by the property that
 their immediate ancestor is also a decendent of the element.
 The _ancestors_ of an element are defined by the property that
 their immediate decendents are also ancestors of the element.
+
+## Element Content Model
+
+Element content is a list of children of type _choice_ or _sequence_.
+A choice has the form `'(' cp ('|' cp)* ')'` and a sequnce has
+the form `'(' cp (',' cp)* ')'` where `cp` can be any list
+of names, choices, or seqeuences.
 
 ## XPath
 
