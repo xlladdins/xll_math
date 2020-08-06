@@ -32,34 +32,29 @@ a document. We omit these for simplicity.
 Names can't start with digits and sometimes contain a period (`.`).
 
 Note that the characters `<`, `>`, and `&` have
-special meaning. We call characters other than these _nice_.
+special meaning. We call characters other than these _nice_. (This is non-standard terminology.)
 The entities `&lt;`, `&gt;`, and `&amp;` can be used to include
-special charaters in a string.
+special charaters in content.
 
-Comments cannot be nested and the string must not start or
-end with the minus character `-`.
+Comments cannot be nested and the string must not start or end with the minus (`-`) character.
 
 Strings are messier than what is specified above.
 
 In a _valid_ XML document the name of each start-tag must be the same as
 the name of the correponding end-tag.
 
-A document is a _tree_.
-The top level element is called the _root_
-where the elements are the _nodes_ and _edges_ connect each element to
-its content. The order of elements in the content
+Documents define a _tree_.
+The document element is called the _root_.
+Edges connect elements to every element in
+its `content`.
+These are _children_ of the element.
+The order of elements in the text of the document
 provide a _tree ordering_. This is called _document order_.
 
-The _children_ of an element are the elements its content.
 An element is the _parent_ of each of its children.
-The children of a node are _siblings_.
+The children of an element are _siblings_.
 
-Children are _immediate _decendents_ of their parent.
-A parent is the _immediate ancestor_ of its children.
-The _decendents_ of an element are defined by the property that
-their immediate ancestor is also a decendent of the element.
-The _ancestors_ of an element are defined by the property that
-their immediate decendents are also ancestors of the element.
+The transitive closure of children are _decendents_.The transitive closure of parents are _ancestors_.
 
 ## XPath
 
@@ -71,8 +66,8 @@ simple _data model_.
 
 An _item_ in the data model is either a _node_, _function_,
 or _atomic value_. There are seven kinds of nodes: _document_,
-_element_, _attribute_, _text_, _namespace_, _comment_, and _processing
-instruction_. Functions can be _called_ given values for _parameters_
+_element_, _attribute_, _text_, _namespace_, _comment_, and _processing instruction_. 
+Functions can be _called_ given values for _parameters_
 (arguments of the function) belonging to the _domain_ of the function.
 The body of the function _implementats_ how the parameter values are
 converted to the _result_ of the function call.  Atomic values can have
@@ -96,7 +91,7 @@ The domain of a map is a set of strings.
 
 #### Accessor
 
-_Accessors_ return information about nodes.
+_Accessors_ return information about content of nodes.
 
 The _attribute_ accessor returns the attributes of a node.
 It returns a sequence of zero or more attributes.
