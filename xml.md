@@ -63,105 +63,101 @@ of names, choices, or seqeuences.
 
 The _data model_ is an abstract representation of an XML document.
 It is a _tree_ of _items_. An _item_ is a _node_, _function_, or
-_atomic value_.
+_atomic value_. Every item has a _type_ and a _value_.
 
-There are seven kinds of nodes: _document_, _element_, _attribute_,
+A _sequence_ is an ordered list of zero or more items. The _empty sequence_
+contains no items. A sequence containing
+exactly one item is a _singleton_. The data models considers a singleton
+to be identical to the item it contains. Sequences **may not** contain sequences.
+
+There are seven types of nodes: _document_, _element_, _attribute_,
 _text_, _namespace_, _comment_, and _processing instruction_.
+We will ignore namespace and processing instructions for now.
 
 The document node is the root of the tree. It has a single element
-with _edges_ to each item in its _content_. The only items allowed
-in content are elements, text, entities (atomic data?), or comments. The elements
-have edges to each item in its content while text, entities, and
-comments are _leaf_ nodes.
-
-Items in the sequence are children
-of the content.
-
-A function ...
-
-An atomic value ...
-
-correspond to XML
-element tags or the content of the element.
-The _edges_ connect each element
-to its content and content its _children_.
-Content is a sequence of zero or more elments, text,
-entities, or comments.
-
-A _sequence_ is an ordered list of zero or more items. The _empty sequence_
-contains no items. A sequence containing
-exactly one item is a _singleton_. The data models considers a singleton
-to be identical to the item it contains. Sequences **may not** contain sequences.
+with _edges_ to each item in its _content_, the _children_ of the element.
+Content is a sequence of zero or more elments, text, entities, or comments.
+Elements have edges, in turn, to each item in its content while text, entities, and
+comments are _leaf_ nodes. Elemnts can have attributes that are _key_-_value_
+pairs.
 
 A _link_ is a special type of edge from one element to another.
-If an element has an `id` attribute then its value can be used to
+If an element has an attribute with key `id` then its value can be used to
 specify the target of a link. Any other element can use
-zero or more the `href` attribute with value equal to the
-id to create links. In a well-formed document ids are unique.
+an attribute with key `href` and value equal to the
+id to create links. In a well-formed document an element can have
+exactly zero or one `href` and `id` attribute and `id` values must be unique.
 
-An _item_ in the data model is either a _node_, _function_,
-or _atomic value_. There are seven kinds of nodes: _document_,
-_element_, _attribute_, _text_, _namespace_, _comment_, and _processing instruction_. 
-
-<!--
-An _item_ in the data model is either a _node_, _function_,
-or _atomic value_.
-There are seven kinds of nodes: _document_,
-_element_, _attribute_, _text_, _namespace_, _comment_, and _processing instruction_. 
-Functions can be _called_ given values for _parameters_
-(arguments of the function) belonging to the _domain_ of the function.
-The body of the function _implementats_ how the parameter values are
-converted to the _result_ of the function call.  Atomic values can have
-_type_ string, boolean, integer, floating point number, date, etc.
-
-A _sequence_ is an ordered list of zero or more items. The _empty sequence_
-contains no items. A sequence containing
-exactly one item is a _singleton_. The data models considers a singleton
-to be identical to the item it contains. Sequences **may not** contain sequences.
-
-The data model also provides for _arrays_ and _maps_ as special cases
-of functions.  Arrays are sometimes called vectors, ordered lists, or
+A function has a _name_, _parameters_, and a _body_. It can be called using
+its name with parameter values belonging to the _domain_ of the function.
+The body is evaluated using the supplied parameter values to return a result.
+_Arrays_ and _maps_ are special cases
+of functions. 
+The domain of an an array is a set of positive integers
+_{1,..,n}_ where _n_ is the _size_ of the array.
+Arrays are sometimes called vectors, ordered lists, or
 sequences. Unlike a sequence in the data model, an array is an item and
 can appear as an item in a sequence.
+The domain of a map is a set of strings.
 Maps are sometimes called associative arrays, dictionaries, hash tables,
 keyed lists, or objects (as in JSON).
 
-The domain of an an array is a set of positive integers
-_{1,..,n}_ where _n_ is the _size_ of the array.
-The domain of a map is a set of strings.
--->
-
-### Accessors
-
-_Accessors_ return information about content of nodes.
-
-The _attribute_ accessor returns the sequence of attributes of an element node.
-
-The _children_ accessor returns the sequence of nodes of a contend node.
+Atomic values are the lowest level item.
+They can have [primitive types](https://www.w3.org/TR/xmlschema-2/#built-in-primitive-datatypes)
+number, string, boolean, date, etc.
 
 
-Document nodes encapsulate XML documents.
+### [Accessors](https://www.w3.org/TR/query-datamodel/#accessors)
+
+_Accessors_ return information about nodes. They are defined on every
+kind of node but may return an empty sequence.
+
+_node-kind_
+  ~ returns one of the strings "attribute", "comment", "document",
+"element", "namespace", "processing-instruction", or "text".
+
+_attribute_
+  ~ returns the sequence of key-value attributes of an element.
+
+The _node-kind_ accessor returns one of the strings "attribute", "comment", "document",
+"element", "namespace", "processing-instruction", or "text".
+
+The _attribute_ accessor returns the sequence of key-value attributes of an element.
+
+The _node-name_ accessor returns the name of the node as a string. If the node is an element it
+will be the tag of the element.
+
+The _string-value_ accessor returns the string value of a node. If the node is an element
+it returns the content of the element.
+
+The _children_ accessor returns the sequence of child nodes in the content of an element.
+
+The _parent_ accessor returns the parent of a node. If the node does not have a parent
+an empty sequence is returned.
+
+
 
 ## XPath
 
 XPath is an expression language for addressing nodes in an XML tree.
-The complete specification is quite complicated but it acts on a
-simple _data model_.
-
+Applying a _path expression_ to a tree satisfying the data model results in a sequence of nodes
+contained in the tree. An expression consists of a sequence of _steps_.
+Steps select from the _context_ provided by the previous step.
+The initial context of the first step is the entire document tree.
 
 ### Path Expression
 
 A _path expression_ consists of a series of one or more _steps_.
-Each step specifies successive refinements of nodes to be addressed
-and acts in the _context_ selected by the previous steps. A context
-is a sequence of nodes.
+Each step takes a sequence of nodes, the step _context_, and results
+in a sequence of nodes, the context provided to the following step.
+The context of the first step is the document provided to the path expression.
 
 ```
 	PathExpr ::= RelativePathExpr | '/' RelativePathExpr? | '//' RelativePathExpr
 	RelativePathExpr ::= StepExp (('/' | '//') StepExpr)*
 ```
 where question mark (`?`) indicates exactly zero or one occurence and we use
-parenthesis `()` for grouping. They don't show up in expression.
+parenthesis `()` for grouping. They don't occur in the expression.
 
 If _E_ is a relative path expression then '_E_', '/',  '/_E_', and '//_E_'
 are (the only) valid path expressions. Permissable relative path expressions are
@@ -173,10 +169,7 @@ or more initial steps. A '/' at the beginning of a path expression selects the
 document root. A '//' at the beginning of a path
 expression selects the root and all decendents.
 
-A relative path expression selects the sequence of nodes that are specified by the
-steps in the path.
-
-#### Step
+### Step
 
 Each step generates a sequence of items from the context provided by the
 previous step and then filters the sequence by zero or more predicates.
