@@ -112,12 +112,12 @@ number, string, boolean, date, etc.
 _Accessors_ return information about nodes. They are defined on every
 kind of node but may return an empty sequence.
 
-_node-kind_
-  ~ returns one of the strings "attribute", "comment", "document",
+node-kind
+  : returns one of the strings "attribute", "comment", "document",
 "element", "namespace", "processing-instruction", or "text".
 
-_attribute_
-  ~ returns the sequence of key-value attributes of an element.
+attribute
+  : returns the sequence of key-value attributes of an element.
 
 The _node-kind_ accessor returns one of the strings "attribute", "comment", "document",
 "element", "namespace", "processing-instruction", or "text".
