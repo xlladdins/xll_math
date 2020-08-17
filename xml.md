@@ -142,7 +142,7 @@ It results in a concatenation of the node sequences of each single expression.
 
 Single expressions can be _for expressions_, _quantified expressions_, _if expressions_, or _or expressions_.
 
-A for expression has the form `for `_var_` in `_expr_` return `_expr. XPath allows you to define
+A for expression has the form '`for `_var_` in `_expr_` return `_expr_'. XPath allows you to define
 variables and access their values by prefixing their name with a dollar sign (`$`) character.
 
 The `union`, or `|`, binary operator concatenate two sequences of nodes and removes any
