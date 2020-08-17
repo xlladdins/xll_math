@@ -34,19 +34,12 @@ Names for tags specify the element _type_.
 If the element is an `empty-tag` it contains no children,
 otherwise the content of the element are its _children_.
 
-<<<<<<< HEAD
-Note that the characters `<`, `>`, and `&` have
-special meaning. We call characters other than these _nice_. (This is non-standard terminology.)
-The entities `&lt;`, `&gt;`, and `&amp;` can be used to include
-special charaters in content.
-=======
 Note that the characters `<`, `>`, `&`, `'`, and `"` have special
 meaning in XML. We call characters other than these _nice_.  (This is
 not standard W3 notation. The full story for allowable text is messy.)
 The entities `&lt;`, `&gt;`, `&amp;`, `&apos;`, and `&quot;` can be
 used to include (_escape_) special characters in text. Text can contain
 non-nice characters after the initial character.
->>>>>>> c18131465aa3e401849352658fc256823333213c
 
 Comments cannot be nested and the string must not start or end with the minus (`-`) character.
 
@@ -57,36 +50,63 @@ Any text that is not markup is character data.
 In a _well-formed_ XML document the name of each start-tag must be the same as
 the name of the correponding end-tag.
 
-Documents define a _tree_.
-The document element is called the _root_.
-Edges connect elements to every element in
-its `content`.
-These are _children_ of the element.
-The order of elements in the text of the document
-provide a _tree ordering_. This is called _document order_.
-
-An element is the _parent_ of each of its children.
-The children of an element are _siblings_.
-
-The transitive closure of children are _decendents_.The transitive closure of parents are _ancestors_.
-
+<!--
 ## Element Content Model
 
 Element content is a list of children of type _choice_ or _sequence_.
 A choice has the form `'(' cp ('|' cp)* ')'` and a sequnce has
 the form `'(' cp (',' cp)* ')'` where `cp` can be any list
 of names, choices, or seqeuences.
+-->
 
-## XPath
+## Data Model
 
-XPath is an expression language for addressing nodes in an XML tree.
-The complete specification is quite complicated but it acts on a
-simple _data model_.
+The _data model_ is an abstract representation of an XML document.
+It is a _tree_ of _items_. An _item_ is a _node_, _function_, or
+_atomic value_.
 
-### Data Model
+There are seven kinds of nodes: _document_, _element_, _attribute_,
+_text_, _namespace_, _comment_, and _processing instruction_.
+
+The document node is the root of the tree. It has a single element
+with _edges_ to each item in its _content_. The only items allowed
+in content are elements, text, entities (atomic data?), or comments. The elements
+have edges to each item in its content while text, entities, and
+comments are _leaf_ nodes.
+
+Items in the sequence are children
+of the content.
+
+A function ...
+
+An atomic value ...
+
+correspond to XML
+element tags or the content of the element.
+The _edges_ connect each element
+to its content and content its _children_.
+Content is a sequence of zero or more elments, text,
+entities, or comments.
+
+A _sequence_ is an ordered list of zero or more items. The _empty sequence_
+contains no items. A sequence containing
+exactly one item is a _singleton_. The data models considers a singleton
+to be identical to the item it contains. Sequences **may not** contain sequences.
+
+A _link_ is a special type of edge from one element to another.
+If an element has an `id` attribute then its value can be used to
+specify the target of a link. Any other element can use
+zero or more the `href` attribute with value equal to the
+id to create links. In a well-formed document ids are unique.
 
 An _item_ in the data model is either a _node_, _function_,
 or _atomic value_. There are seven kinds of nodes: _document_,
+_element_, _attribute_, _text_, _namespace_, _comment_, and _processing instruction_. 
+
+<!--
+An _item_ in the data model is either a _node_, _function_,
+or _atomic value_.
+There are seven kinds of nodes: _document_,
 _element_, _attribute_, _text_, _namespace_, _comment_, and _processing instruction_. 
 Functions can be _called_ given values for _parameters_
 (arguments of the function) belonging to the _domain_ of the function.
@@ -109,18 +129,25 @@ keyed lists, or objects (as in JSON).
 The domain of an an array is a set of positive integers
 _{1,..,n}_ where _n_ is the _size_ of the array.
 The domain of a map is a set of strings.
+-->
 
-#### Accessor
+### Accessors
 
 _Accessors_ return information about content of nodes.
 
-The _attribute_ accessor returns the attributes of a node.
-It returns a sequence of zero or more attributes.
+The _attribute_ accessor returns the sequence of attributes of an element node.
 
-The _children_ acc...
+The _children_ accessor returns the sequence of nodes of a contend node.
 
 
 Document nodes encapsulate XML documents.
+
+## XPath
+
+XPath is an expression language for addressing nodes in an XML tree.
+The complete specification is quite complicated but it acts on a
+simple _data model_.
+
 
 ### Path Expression
 
