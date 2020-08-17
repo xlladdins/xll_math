@@ -112,37 +112,48 @@ number, string, boolean, date, etc.
 _Accessors_ return information about nodes. They are defined on every
 kind of node but may return an empty sequence.
 
-node-kind
-  : returns one of the strings "attribute", "comment", "document",
-	"element", "namespace", "processing-instruction", or "text".
-
-attribute
-  : returns the sequence of key-value attributes of an element.
-
-The _node-kind_ accessor returns one of the strings "attribute", "comment", "document",
+_node-kind_: returns one of the strings "attribute", "comment", "document",
 "element", "namespace", "processing-instruction", or "text".
 
-The _attribute_ accessor returns the sequence of key-value attributes of an element.
+_attribute_: return the sequence of key-value attributes of an element.
 
-The _node-name_ accessor returns the name of the node as a string. If the node is an element it
+_node-name_: return the name of the node as a string. If the node is an element it
 will be the tag of the element.
 
-The _string-value_ accessor returns the string value of a node. If the node is an element
+_string-value_: return the string value of a node. If the node is an element
 it returns the content of the element.
 
-The _children_ accessor returns the sequence of child nodes in the content of an element.
+_children_: return the sequence of child nodes in the content of an element
+in _document order_.
 
-The _parent_ accessor returns the parent of a node. If the node does not have a parent
+_parent_: return the parent of a node. If the node does not have a parent
 an empty sequence is returned.
 
+The _decendents_ of a node are its children and their decendents.
+The _ancestors_ of a node is its parent and its ancestors.
 
 
 ## XPath
 
 XPath is an expression language for addressing nodes in an XML tree.
-Applying a _path expression_ to a tree satisfying the data model results in a sequence of nodes
-contained in the tree. An expression consists of a sequence of _steps_.
+Applying a XPath _expression_ to a document satisfying the data model results in a sequence of nodes.
+An expression is a list of one or more comma (`,`) separated _single expressions_.
+It results in a concatenation of the node sequences of each single expression.
+
+Single expressions can be _for expressions_, _quantified expressions_, _if expressions_, or _or expressions_.
+
+A for expression has the form `for `_var_` in `_expr_` return `_expr. XPath allows you to define
+variables and access their values by prefixing their name with a dollar sign (`$`) character.
+
+The `union`, or `|`, binary operator concatenate two sequences of nodes and removes any
+duplicate nodes. There are also
+binary operators `intersect` that results in all nodes common to both sequences and `except`
+that results in all nodes in the left-hand sequence that do not belong to the right-hand sequence.
+
+A _path expression_ consists of a sequence of _steps_.
 Steps select from the _context_ provided by the previous step.
+Steps are separated by a single forward slash (`/`) or double slash (`//`)
+to refer to children or ancestors, respectively of the step context.
 The initial context of the first step is the entire document tree.
 
 ### Path Expression
@@ -182,7 +193,7 @@ previous step and then filters the sequence by zero or more predicates.
 	PredicateList ::= Predicate*
 ```
 
-Postfix expressions select primary expressions. These are usually not nodes.
+Postfix expressions select primary expressions. These are usually leaf nodes.
 
 ```
 	PostfixExpr  ::= PrimaryExpr (Predicate | ArgumentList | Lookup)*
