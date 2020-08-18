@@ -22,7 +22,9 @@ following BNF grammar:
 where literal tokens are enclose in single quotes (`'`), vertical bar
 (`|`) indicates alternatives, parentheses (`()`) are used for grouping
 and do not occur in the document, asterisk (`*`) means zero or more
-occurences, and plus (`+`) one or more.
+occurences, and plus (`+`) one or more. We will use question mark (`?`)
+to indicate zero or one occurance. When writing about the grammar we
+use `inline code` instead of enclosing literals in single quotes.
 
 The usual prolog version is `1.0` and encoding `UTF-8`.
 
@@ -30,13 +32,11 @@ Content can also have character data and processing instructions.
 They can be used to embed additional data and information into
 a document. We omit these for simplicity.
 
-Names for tags specify the element _type_.
-If the element is an `empty-tag` it contains no children,
-otherwise the content of the element are its _children_.
+Elements tags are the _name_ of the element.
 
 Note that the characters `<`, `>`, `&`, `'`, and `"` have special
 meaning in XML. We call characters other than these _nice_.  (This is
-not standard W3 notation. The full story for allowable text is messy.)
+not standard W3 notation. The full story for allowable text is a bit messy.)
 The entities `&lt;`, `&gt;`, `&amp;`, `&apos;`, and `&quot;` can be
 used to include (_escape_) special characters in text. Text can contain
 non-nice characters after the initial character.
@@ -63,7 +63,7 @@ of names, choices, or seqeuences.
 
 The _data model_ is an abstract representation of an XML document.
 It is a _tree_ of _items_. An _item_ is a _node_, _function_, or
-_atomic value_. Every item has a _type_ and a _value_.
+_atomic value_. Every item has a _value_ and a _type_.
 
 A _sequence_ is an ordered list of zero or more items. The _empty sequence_
 contains no items. A sequence containing
@@ -263,15 +263,13 @@ If no node matches then the result is empty.
 
 A kind test matches node types. These can be
 `document-node(`(ElementTest)?`)` where ElementTest is
-`element(` (NameTest)? `)` or `element(` NameTest `,` TypeName `?`? `)`,
+`element(` NameTest? `)` or `element(` NameTest `,` TypeName `?`? `)`,
 an ElementTest, 
 `attribute(` NameTest (`,` TypeName)? `)`, 
 `text()`,
 `comment()`, or `node()`.
 The latter selects all nodes, similar to the wildcard `*` for names.
 
-
-Abbreviated syntax...
 
 ## Remarks
 
@@ -281,3 +279,5 @@ than you or I will ever know, so take advantage of that. Right clicking on a nod
 up a menu that allows you to, among other things, copy its XPath to the clipboard. 
 It will give you _an_ XPath that will select the node, but it might not be the most natural one
 for you to use. Think of it as a good starting point.
+
+You can also edit anything in the inspector and the changes will be immediately reflected in the document.
