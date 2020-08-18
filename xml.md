@@ -141,17 +141,39 @@ An expression is a list of one or more comma (`,`) separated _single expressions
 It results in a concatenation of the node sequences of each single expression.
 
 XPath is an expressive language. It has loops, quantification, and conditionals.
-Single expressions can be _for expressions_, _quantified expressions_, _if expressions_, or _or expressions_.
+In addition to single expressions that are _value expressions_<span name="a1">[1](#f1)</span>
+they can also be _for expressions_, _quantified expressions_, or _conditional expressions_.
+
+<b id="f1">[1]<b>. The fact a single expression can be a value expression is well hidden in the XPath
+specification. It specifes a single expression
+can be an [`OrExpr`](https://www.w3.org/TR/xpath20/#doc-xpath-OrExpr),
+which can be a `AndExpr`,
+which can be a `ComparisonExpr`,
+which can be a `RangeExpr`,
+which can be a `AdditiveExpr`,
+which can be a `MultiplicativeExpr`,
+which can be a `UnionExpr`,
+which can be a `IntersectExceptExpr`,
+which can be a `InstanceofExpr`,
+which can be a `TreatExpr`,
+which can be a `CastableExpr`,
+which can be a `CastExpr`,
+which can be a `UnaryExpr`,
+which can be a `ValueExpr`. Whew! [&larrhk;](#a1)
 
 A for expression has the form '`for $`_var_` in `_list_` return `_body_'.
 The body is executed once for for each item in the list. The items can be referred to using
-var in the body.  A for expression may have multiple in clauses
+var in the body.  A for expression may have multiple `in` clauses
 '`for $`_var_` in `_list_ (`, $`_var'_` in `_list'_ )*` return `_body_' and loops over
 the cartesian product of the lists.
 
 A quantified expression has the form '(`some` | `every`) `$`_var_` in `_list_ (`, $`_var'_` in `_list'_)*
 ` satisfies `_cond_'.
 It selects one or all list items that evaluate to true when substituted into the condition.
+
+An conditional expression has the form '`if (`_cond_`) then `_expr_` else `_expr_.
+It returns the first expression if the [effective boolean value](https://www.w3.org/TR/xpath20/#id-ebv)
+of the condition is true and the second expression otherwise.
 
 The `union`, or `|`, binary operator concatenate two sequences of nodes and removes any
 duplicate nodes. There are also
