@@ -144,7 +144,7 @@ XPath is an expressive language. It has loops, quantification, and conditionals.
 In addition to single expressions that are _value expressions_<sup name="a1">[1](#f1)</sup>
 they can also be _for expressions_, _quantified expressions_, or _conditional expressions_.
 
-<b id="f1">[1]</b>. The fact a single expression can be a value expression is well hidden in the XPath
+<span id="f1">[1]</span>. The fact a single expression can be a value expression is well hidden in the XPath
 specification. It specifes a single expression
 can be an [`OrExpr`](https://www.w3.org/TR/xpath20/#doc-xpath-OrExpr),
 which can be a `AndExpr`,
