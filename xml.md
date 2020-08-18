@@ -149,7 +149,7 @@ var in the body.  A for expression may have multiple in clauses
 '`for $`_var_` in `_list_ (`, $`_var'_` in `_list'_ )*` return `_body_' and loops over
 the cartesian product of the lists.
 
-A quantified expression has the form '(`some` | `every`) `$`_var_` in `_list_ (`$`_var'_` in `_list'_)*
+A quantified expression has the form '(`some` | `every`) `$`_var_` in `_list_ (`, $`_var'_` in `_list'_)*
 ` satisfies `_cond_'.
 It selects one or all list items that evaluate to true when substituted into the condition.
 
