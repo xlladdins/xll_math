@@ -130,8 +130,10 @@ _parent_: return the parent of a node. If the node does not have a parent
 an empty sequence is returned.
 
 The _decendents_ of a node are its children and their decendents.
+They are the _transitive closure_ of the children.
 The _ancestors_ of a node is its parent and its ancestors.
-
+They are the transitive closure of the parent.
+A collection of children are _siblings_.
 
 ## XPath
 
@@ -194,15 +196,11 @@ Subsequent steps select from the _context_ provided by the previous step.
 	RelativePathExpr ::= StepExp (('/' | '//') StepExpr)*
 ```
 
-If _E_ is a relative path expression then '_E_', '/',  '/_E_', and '//_E_'
-are (the only) valid path expressions. Permissable relative path expressions are
-'_S_', '/_S_/_T_', and '//_S_/_T_//_U_' where _S_, _T_, and _U_ are step expressions.
-
 Steps are separated by '/' or '//'.
-Path expressions starting with '/' or '//' are abbreviations for one
-or more initial steps. A '/' at the beginning of a path expression selects the
-document root. A '//' at the beginning of a path
-expression selects the root and all decendents.
+Use a single slash to specify ... and double slash to specify ...
+Path expressions starting with '/' or '//' are abbreviations for one or more initial steps.
+A '/' at the beginning of a path expression selects the document root.
+A '//' at the beginning of a path expression selects the root and all decendents.
 
 ### Step
 
@@ -235,27 +233,51 @@ each of the nodes, and optionally filters those based on zero or more node test 
 The _forward axis_ is the current node and decendents. 
 The _reverse axis_ is the current node and its ancestors.
 
-The axes have names. For forward axis 'child' specifies all children of the current node,
-'descendent' is the transitive closure of all children, 'attribute' is the sequence
-of attributes associated with the current node, siblings are ...
-For reverse axes 'parent' is the (unique) parent of the current node or empty if
-the node does not have a parent, ...
+The axes have names.
+For forwards axes `self` is the current node,
+`child` specifies all children of the current node,
+`descendent` is the transitive closure of all children,
+`following-sibling` are all siblings after the current node at the same level,
+`following` is the transitive closure of all following siblings,
+`attribute` is the sequence of attributes associated with the current node.
+`descendent-or-self` is what it sounds like.
 
-There are abbreviations for the most common axes. The 'self' axis is '.', the
-'parent' is '..', and '@' selects 'attribute's of the current node.
+For reverse axes `parent` is the (unique) parent of the current node or empty,
+`ancestor` is the transitive closure of parent, 
+`preceding-sibling` are all siblings before the current node at the same level,
+`preceding` is the transitive closure of preceding siblings, and
+`ancestor-or-self` is what it sounds like.
+
+There are abbreviations for the most common axes. The `self` axis is `.`, the
+`parent` is `..`, and `@` selects `attribute`s of the current node.
 
 A node test is a filter acting on the name or kind of a node. They are separated
 from the axis name by a '::' token.
 ```
-	NodeTest ::= KindTest | NameTest
-	NameTest ::= EQName | Wildcard
-	Wildcard ::= '*' | (NCName ':*') | ('*:' NCName) | (BracedURILiteral '*')
-	EQName   ::= QName | URIQualifiedName
+	NodeTest ::= NameTest | KindTest
+	NameTest ::= Name | "*"
 ```
 
-A name test matches the node having the same name or all nodes if the wildcard is '*'.
+A name test matches the node having the same name or all nodes if "*".
 If no node matches then the result is empty.
+
+A kind test matches node types. These can be
+`document-node(`(ElementTest)?`)` where ElementTest is
+`element(` (NameTest)? `)` or `element(` NameTest `,` TypeName `?`? `)`,
+an ElementTest, 
+`attribute(` NameTest (`,` TypeName)? `)`, 
+`text()`,
+`comment()`, or `node()`.
+The latter selects all nodes, similar to the wildcard `*` for names.
 
 
 Abbreviated syntax...
 
+## Remarks
+
+All modern browsers are equipped with a "developer tool" that can be used to inspect documents.
+Usually the `F12` key will bring that up. It knows more about XPath, CSS, and DOM structure
+than you or I will ever know, so take advantage of that. Right clicking on a node will pop
+up a menu that allows you to, among other things, copy its XPath to the clipboard. 
+It will give you _an_ XPath that will select the node, but it might not be the most natural one
+for you to use. Think of it as a good starting point.
