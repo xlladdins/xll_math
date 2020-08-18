@@ -140,10 +140,17 @@ Applying a XPath _expression_ to a document satisfying the data model results in
 An expression is a list of one or more comma (`,`) separated _single expressions_.
 It results in a concatenation of the node sequences of each single expression.
 
+XPath is an expressive language. It has loops, quantification, and conditionals.
 Single expressions can be _for expressions_, _quantified expressions_, _if expressions_, or _or expressions_.
 
-A for expression has the form '`for `_var_` in `_expr_` return `_expr_'. XPath allows you to define
-variables and access their values by prefixing their name with a dollar sign (`$`) character.
+A for expression has the form '`for $`_var_` in `_list_` return `_body_'.
+The body is executed once for for each item in the list. The items can be referred to using
+var in the body.  A for expression may have multiple in clauses
+'`for $`_var_` in `_list_ (`, $`_var'_` in `_list'_ )*` return `_body_' and loops over
+the cartesian product of the lists.
+
+A quantified expression has the form '(`some` | `every`) `$`_var_` in `_list_ (`$`_var'_` in `_list'_)*
+` satisfies `_expr_'.
 
 The `union`, or `|`, binary operator concatenate two sequences of nodes and removes any
 duplicate nodes. There are also
