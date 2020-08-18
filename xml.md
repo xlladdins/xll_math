@@ -164,41 +164,35 @@ which can be a `ValueExpr`. Whew! [&larrhk;](#a1)
 A for expression has the form '`for $`_var_` in `_list_` return `_body_'.
 The body is executed once for for each item in the list. The items can be referred to using
 var in the body.  A for expression may have multiple `in` clauses
-'`for $`_var_` in `_list_ (`, $`_var'_` in `_list'_ )*` return `_body_' and loops over
+'`for $`_var_` in `_list_ (`, $`_var'_` in `_list'_ )*` return `_body_' which loops over
 the cartesian product of the lists.
 
-A quantified expression has the form '(`some` | `every`) `$`_var_` in `_list_ (`, $`_var'_` in `_list'_)*
-` satisfies `_cond_'.
+A quantified expression has the form
+'(`some` | `every`) `$`_var_` in `_list_ (`, $`_var'_` in `_list'_)* ` satisfies `_cond_'.
 It selects one or all list items that evaluate to true when substituted into the condition.
 
 An conditional expression has the form '`if (`_cond_`) then `_expr_` else `_expr_.
 It returns the first expression if the [effective boolean value](https://www.w3.org/TR/xpath20/#id-ebv)
 of the condition is true and the second expression otherwise.
 
-The `union`, or `|`, binary operator concatenate two sequences of nodes and removes any
-duplicate nodes. There are also
-binary operators `intersect` that results in all nodes common to both sequences and `except`
-that results in all nodes in the left-hand sequence that do not belong to the right-hand sequence.
-
-A _path expression_ consists of a sequence of _steps_.
-Steps select from the _context_ provided by the previous step.
-Steps are separated by a single forward slash (`/`) or double slash (`//`)
-to refer to children or ancestors, respectively of the step context.
-The initial context of the first step is the entire document tree.
+XPath has a full complement of set, logical, and arithmetic operators,
+as the previous footnote suggests. Recent versions have limited regular
+expression functionality.
 
 ### Path Expression
 
-A _path expression_ consists of a series of one or more _steps_.
+A _path expression_ consists of a series of _steps_.
 Each step takes a sequence of nodes, the step _context_, and results
-in a sequence of nodes, the context provided to the following step.
-The context of the first step is the document provided to the path expression.
+in another sequence of nodes: the context provided to the following step.
+Steps are separated by a single forward slash (`/`) or double slash (`//`)
+to refer to children or ancestors, respectively, of the step context.
+The initial context of the first step is the entire document tree.
+Subsequent steps select from the _context_ provided by the previous step.
 
 ```
 	PathExpr ::= RelativePathExpr | '/' RelativePathExpr? | '//' RelativePathExpr
 	RelativePathExpr ::= StepExp (('/' | '//') StepExpr)*
 ```
-where question mark (`?`) indicates exactly zero or one occurence and we use
-parenthesis `()` for grouping. They don't occur in the expression.
 
 If _E_ is a relative path expression then '_E_', '/',  '/_E_', and '//_E_'
 are (the only) valid path expressions. Permissable relative path expressions are
@@ -236,16 +230,14 @@ _literals_, _variable references_, _context item expressions_, and _function cal
 They may be enclosed in parentheses to control the order in which they are evaluated.
 
 An _axis step_ selects nodes from the current context, performs a test on
-each of the nodes, and optionally filters those based on zero or more predicates.
+each of the nodes, and optionally filters those based on zero or more node test predicates.
 
-A _forward axis_ looks a the current node and its attributes, siblings
-after the current node (using document order), and decendents. 
-A _reverse axis_ looks at siblings before the current node and ancestors
-(optionally includng the current node).
+The _forward axis_ is the current node and decendents. 
+The _reverse axis_ is the current node and its ancestors.
 
-The axes have names. For forward axes 'child' specifies all children of the current node,
+The axes have names. For forward axis 'child' specifies all children of the current node,
 'descendent' is the transitive closure of all children, 'attribute' is the sequence
-of attributes associated with the current node, ...
+of attributes associated with the current node, siblings are ...
 For reverse axes 'parent' is the (unique) parent of the current node or empty if
 the node does not have a parent, ...
 
