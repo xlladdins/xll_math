@@ -1,7 +1,7 @@
 # XML
 
 A (simplified) eXtensible Markup Language _document_ is defined by the
-following BNF grammar:
+following [BNF](https://www.w3.org/TR/REC-xml/#sec-notation) grammar:
 
 ```
 	document  ::= prolog element
