@@ -234,7 +234,7 @@ The atomic expression `(1 to 100)` is the sequence of numeric times `(1, 2, ...,
 The predicate `[. mod 2 eq 0]` looks at each item (`.`), evaluates the remainder
 modulo 2 and tests if that equals 0. The result is `(2, 4, ..., 100)`
 
-> $book/(chapter | appendix)[1]
+> `$book/(chapter | appendix)[1]`
 
 If the value of the `book` variable has zero or more children named `chapter` or `appendix` the first
 occurences of both, or either, or none, is the result.
