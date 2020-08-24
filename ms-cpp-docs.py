@@ -38,25 +38,22 @@ def section_href(table):
 def section_text(table):
 	return [a.text for a in table]
 
+# array of urls to floating point functions hrefs("/floating-point-support.md")
 def hrefs(item):
 	page = page_html(item)
-	#print(etree.tostring(page, pretty_print=True).decode('utf-8'))
 	section = section_table(page)
 	return [f'{git_url}{h}' for h in section_href(section)]
 
-ref_url = crt_url + "/reference"
-fun_url = ref_url + "/bessel-functions-j0-j1-jn-y0-y1-yn.md"
+fun_item = "/reference/bessel-functions-j0-j1-jn-y0-y1-yn.md"
 #fun_url = ref_url + "/ldexp.md"
 
-
-
-# use .text to extract cdecl
-syntax_xpath = "//*[@id='syntax']/following::pre[1]/code"
-# sloppy parameter string
-parameters_xpath = "//*[@id='parameters']/following::p[1]"
-return_value_xpath = "//*[@id='return-value']/following::p[1]"
+# user content
+user_content_xpath = '//*[starts-with(@id, "user-content-")]'
+#user_content_xpath = '//*[starts-with(@id, "user-content-")]/following::p'
 
 if __name__ == '__main__':
-	href = hrefs(fps_item)
-	for h in href:
-		print (h)
+	page = page_html(fun_item)
+	x = page.xpath(user_content_xpath)
+	for i in x:
+		print(etree.tostring(i, pretty_print=True).decode('utf-8'))
+		#print(x)
