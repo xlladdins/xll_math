@@ -10,10 +10,10 @@ crt_url = git_url + "/MicrosoftDocs/cpp-docs/blob/master/docs/c-runtime-library"
 
 # floating point main page
 # replace by appropriate docs
-fps_docs = "/floating-point-support.md"
+fps_item = "/floating-point-support.md"
 
-def page_html(docs):
-	req = requests.get(crt_url + docs)
+def page_html(item):
+	req = requests.get(crt_url + item)
 	assert (req.status_code == 200)
 	# if r.status == 200: ...
 	parser = etree.HTMLParser(recover=True)
@@ -37,8 +37,8 @@ def section_href(table):
 def section_text(table):
 	return [a.text for a in table]
 
-def hrefs(docs):
-	page = page_html(docs)
+def hrefs(item):
+	page = page_html(item)
 	#print(etree.tostring(page, pretty_print=True).decode('utf-8'))
 	section = section_table(page)
 	return [f'{git_url}{h}' for h in section_href(section)]
@@ -57,6 +57,6 @@ parameters_xpath = "//*[@id='parameters']/following::p[1]"
 return_value_xpath = "//*[@id='return-value']/following::p[1]"
 
 if __name__ == '__main__':
-	href = hrefs(fps_docs)
+	href = hrefs(fps_item)
 	for h in href:
 		print (h)
