@@ -6,6 +6,7 @@ import lxml.etree as etree
 from lxml import html
 
 git_url = "https://github.com"
+# Microsoft github C runtime libray documentation
 crt_url = git_url + "/MicrosoftDocs/cpp-docs/blob/master/docs/c-runtime-library"
 
 # floating point main page
@@ -43,12 +44,11 @@ def hrefs(item):
 	section = section_table(page)
 	return [f'{git_url}{h}' for h in section_href(section)]
 
-ref_url = git_url + crt_url + "/reference"
-#hyp_url = ref_url + "/hypot-hypotf-hypotl-hypot-hypotf-hypotl"
-#hyp_url = "https://docs.microsoft.com/en-us/cpp/c-runtime-library/reference/hypot-hypotf-hypotl-hypot-hypotf-hypotl"
-#git_url = "https://github.com"
-#crt_url = git_url + "/MicrosoftDocs/cpp-docs/blob/master/docs/c-runtime-library"
-hyp_url = ref_url + "/ldexp.md"
+ref_url = crt_url + "/reference"
+fun_url = ref_url + "/bessel-functions-j0-j1-jn-y0-y1-yn.md"
+#fun_url = ref_url + "/ldexp.md"
+
+
 
 # use .text to extract cdecl
 syntax_xpath = "//*[@id='syntax']/following::pre[1]/code"
