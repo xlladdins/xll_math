@@ -27,6 +27,9 @@ def page_html(item):
 
 	return etree.HTML(req.content, parser)
 
+#
+# List of all functions
+#
 # user content
 section_xpath = '//*[starts-with(@id, "user-content-")]'
 # first column of table after matching id
@@ -51,6 +54,9 @@ def hrefs(item):
 	section = section_table(page)
 	return [f'{git_url}{h}' for h in section_href(section)]
 
+#
+# Individual functions
+#
 fun_item = "/reference/bessel-functions-j0-j1-jn-y0-y1-yn.md"
 #fun_url = ref_url + "/ldexp.md"
 
@@ -66,11 +72,18 @@ def section_syntax(page):
 
 	return text.split(';\n')
 
+parameters_xpath = '//*[@id="user-content-parameters"]/parent::h3/following::p'
+def section_parameters(page):
+	params = page.xpath(parameters_xpath)
+
+	return params
+
 if __name__ == '__main__':
 	page = page_html(fun_item)
-	x = section_syntax(page)
-	print (x)
-	#for i in x:
+	#print(etree.tostring(page, pretty_print=True).decode('utf-8'))
+	#print (page)
+	x = section_parameters(page)
+	for i in x:
 		#tostring(i)
-		#print(etree.tostring(i, pretty_print=True).decode('utf-8'))
-		#print(x)
+		print(etree.tostring(i, pretty_print=True).decode('utf-8'))
+		#print(i)
