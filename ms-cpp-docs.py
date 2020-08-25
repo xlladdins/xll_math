@@ -4,6 +4,7 @@ import re
 import requests
 import lxml.etree as etree
 from lxml import html
+from lxml.html.clean import clean_html
 
 git_url = "https://github.com"
 # Microsoft github C runtime libray documentation
@@ -13,6 +14,7 @@ crt_url = git_url + "/MicrosoftDocs/cpp-docs/blob/master/docs/c-runtime-library"
 # replace by appropriate docs
 fps_item = "/floating-point-support.md"
 
+# parsed HTML from URL
 def page_html(item):
 	req = requests.get(crt_url + item)
 	assert (req.status_code == 200)
@@ -38,7 +40,8 @@ def section_href(table):
 def section_text(table):
 	return [a.text for a in table]
 
-# array of urls to floating point functions hrefs("/floating-point-support.md")
+# array of urls to floating point functions
+# e.g., hrefs("/floating-point-support.md")
 def hrefs(item):
 	page = page_html(item)
 	section = section_table(page)
@@ -48,12 +51,19 @@ fun_item = "/reference/bessel-functions-j0-j1-jn-y0-y1-yn.md"
 #fun_url = ref_url + "/ldexp.md"
 
 # user content
-user_content_xpath = '//*[starts-with(@id, "user-content-")]'
-#user_content_xpath = '//*[starts-with(@id, "user-content-")]/following::p'
+user_content_xpath = '//*[starts-with(@id, "user-content-")]/parent::h2'
+#syntax_xpath = user_content_xpath + '[text()="Syntax"]/following::div[1]'
+
+syntax_xpath = user_content_xpath + '[text()="Syntax"]/following::div[1]'
+def section_syntax(page):
+	syntax = page.xpath(syntax_xpath)
+
+	#return clean_html(syntax)
+	return [s for s in syntax]
 
 if __name__ == '__main__':
 	page = page_html(fun_item)
-	x = page.xpath(user_content_xpath)
+	x = section_syntax(page)
 	for i in x:
 		print(etree.tostring(i, pretty_print=True).decode('utf-8'))
 		#print(x)

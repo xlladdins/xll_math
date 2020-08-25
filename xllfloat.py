@@ -8,6 +8,7 @@ git_url = "https://github.com"
 crt_url = git_url + "/MicrosoftDocs/cpp-docs/blob/master/docs/c-runtime-library"
 # floating point main page
 float_url = crt_url + "/floating-point-support.md"
+
 id_xpath = '//*[@id="user-content-supported-math-and-floating-point-routines"]'
 td_xpath = id_xpath + "/parent::h2/following::table/tbody/tr/td[1]"
 a_xpath = td_xpath + "/a"
