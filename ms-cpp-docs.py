@@ -3,8 +3,12 @@
 import re
 import requests
 import lxml.etree as etree
+from xml.etree import ElementTree
 from lxml import html
 from lxml.html.clean import clean_html
+from lxml.html.clean import Cleaner
+# cleaner = Cleaner(page_structure=False)                                          
+# cleaner.clean_html(...)
 
 git_url = "https://github.com"
 # Microsoft github C runtime libray documentation
@@ -52,18 +56,21 @@ fun_item = "/reference/bessel-functions-j0-j1-jn-y0-y1-yn.md"
 
 # user content
 user_content_xpath = '//*[starts-with(@id, "user-content-")]/parent::h2'
-#syntax_xpath = user_content_xpath + '[text()="Syntax"]/following::div[1]'
 
+# array of all function declarations
 syntax_xpath = user_content_xpath + '[text()="Syntax"]/following::div[1]'
 def section_syntax(page):
 	syntax = page.xpath(syntax_xpath)
+	text = re.sub(r'\n\s+', '', ''.join(syntax[0].itertext()))
+	text = re.sub(r'\n\)', ')', text);
 
-	#return clean_html(syntax)
-	return [s for s in syntax]
+	return text.split(';\n')
 
 if __name__ == '__main__':
 	page = page_html(fun_item)
 	x = section_syntax(page)
-	for i in x:
-		print(etree.tostring(i, pretty_print=True).decode('utf-8'))
+	print (x)
+	#for i in x:
+		#tostring(i)
+		#print(etree.tostring(i, pretty_print=True).decode('utf-8'))
 		#print(x)

@@ -1,5 +1,28 @@
 # XML
 
+eXtensible Markup Language documents are _text_, a string of (UTF-8) characters.
+_Well-formed_ documents can be _parsed_ into a _tree_ of _elements_.
+
+If text starts with a less-than (`<`) character then the following
+non-space characters are the _name_ of the element. Any characters after that up to
+a greater-than ('>') character specify the _attributes_ of the element.
+Every attribute is a _key-value pair_ of the form `key="value"` and are
+separated by one or more whitespace characters:
+space (` `), tab (`\t`), newline (`\n`), or carriage return (`\r`).
+If the closing greater-than character is preceeded by a _forward slash_ ('/')
+then the element has no _content_. Otherwise all text up to the next matching
+_end tag_ is the content of the element. End tags have the form `</`_name_`>`
+and never contain attributes.
+
+Text not starting with a less-than character is _content_. 
+Content is a sequence of zero or more strings or elements
+that are the _children_ of the enclosing element. Every
+well-formed document begins with an element, the _root element_.
+
+These rules define the tree structure of an XML document.
+
+## Syntax
+
 A (simplified) eXtensible Markup Language _document_ is defined by the
 following [BNF](https://www.w3.org/TR/REC-xml/#sec-notation) grammar:
 
