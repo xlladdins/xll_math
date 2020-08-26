@@ -12,6 +12,16 @@ xll_type = {
 	"double": "XLL_DOUBLE",
 }
 
+def xll_prolog(cat):
+	return f'''
+// xll_{cat.lower()}.cpp - Excel add-in for functions in the {cat} category.
+// Uncomment to build for pre 2007 Excel
+//#define XLOPERX XLOPER
+#include "xll/xll/xll.h"
+
+using namespace xll;
+	'''
+
 def add_in(cdecl, params, help, cat = "XLL"):
 	sep = ',\n\t\t'
 	return f'''
@@ -32,10 +42,12 @@ AddIn xai_{cdecl["fun"]}(
 	'''
 
 
-def test_add_in(cdecl, params, help):
-	print(add_in(cdecl, params, help))
+def test_add_in(cdecl, params, help, cat):
+	print(xll_prolog(cat))
+	print(add_in(cdecl, params, help, cat))
 
 if __name__ == '__main__':
+	cat = "Cmath"
 	decl = {
 		"ret": "void",
 		"fun": "foo",
@@ -46,4 +58,4 @@ if __name__ == '__main__':
 		"i": "is an integer",
 		"c": "is a character",
 	}
-	test_add_in(decl, params, "Function help")
+	test_add_in(decl, params, "Function help", "Cmath")
