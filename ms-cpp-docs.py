@@ -44,8 +44,14 @@ def section_table(page):
 def section_href(table):
 	return [a.attrib['href'] for a in table]
 
+def test_section_href():
+	page = page_html + fps_item
+	href = section_href(table)
+
 def section_text(table):
 	return [a.text for a in table]
+
+	
 
 # array of urls to floating point functions
 # e.g., hrefs("/floating-point-support.md")
@@ -72,18 +78,21 @@ def section_syntax(page):
 
 	return text.split(';\n')
 
-parameters_xpath = '//*[@id="user-content-parameters"]/parent::h3/following::p'
+parameters_xpath = '//*[@href="#parameters"]/parent::h3/following::h2'
+#parameters_xpath = '//*[@id="user-content-parameters"]/parent::h3/following::p/em'
 def section_parameters(page):
 	params = page.xpath(parameters_xpath)
 
 	return params
 
+
 if __name__ == '__main__':
-	page = page_html(fun_item)
+	print('hi')
+	#page = page_html(fun_item)
 	#print(etree.tostring(page, pretty_print=True).decode('utf-8'))
 	#print (page)
-	x = section_parameters(page)
-	for i in x:
+	#x = section_parameters(page)
+	#for i in x:
 		#tostring(i)
-		print(etree.tostring(i, pretty_print=True).decode('utf-8'))
+		#print(etree.tostring(i, pretty_print=True).decode('utf-8'))
 		#print(i)
