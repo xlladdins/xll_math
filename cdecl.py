@@ -4,7 +4,7 @@
 import re
 
 # "ret fun(type arg, ...)"
-# [ret, fun, sig, [[type, name], ...]
+# {ret, fun, sig, arg: [[type, name], ...]}
 def cdecl(text):
 	# sig leading and trailing spaces are trimmed
 	cre =r'\s*(?P<ret>\S+)\s+(?P<fun>\S+)(?<=\s)*\(\s*(?P<sig>.*?)\s*\)'
@@ -18,6 +18,13 @@ def cdecl(text):
 	ret['arg'] = [list(re.match(r'(.*)\s+(\S+)|', a).groups()) for a in re.split(r'\s*,\s*', ret['sig'])]
 
 	return ret
+
+# {ret, fun, sig, arg: [[type, name], ...]}
+# "fun(arg, ...)"
+def ccall(cdecl):
+	args = ', '.join([a[1] for a in cdecl["arg"]])
+
+	return f'{cdecl["fun"]}({args})';
 
 def test_cdecl():
 	tests = [
@@ -69,9 +76,9 @@ def test_cdecl():
 		#!!! more tests
 	]
 	for t in tests:
-		print(f'>{t["arg"]}<')
-		print(f'arg: >{cdecl(t["arg"])}<')
-		print(f'ret: >{t["ret"]}<')
+		#print(f'>{t["arg"]}<')
+		#print(f'arg: >{cdecl(t["arg"])}<')
+		#print(f'ret: >{t["ret"]}<')
 		assert(cdecl(t["arg"]) == t["ret"])
 
 if __name__ == '__main__':

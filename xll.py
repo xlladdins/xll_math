@@ -1,5 +1,7 @@
 #!/usr/bin/python3
 # Generate C++ files to be used with the xll library
+from cdecl import ccall
+from ms_cpp_docs import page_html, hrefs, section_function_help, section_syntax, section_parameters
 
 xll_type = {
 	"void": "XLL_VOID",
@@ -13,8 +15,7 @@ xll_type = {
 }
 
 def xll_prolog(cat):
-	return f'''
-// xll_{cat.lower()}.cpp - Excel add-in for functions in the {cat} category.
+	return f'''// xll_{cat.lower()}.cpp - Excel add-in for functions in the {cat} category.
 // Uncomment to build for pre 2007 Excel
 //#define XLOPERX XLOPER
 #include "xll/xll/xll.h"
@@ -24,31 +25,24 @@ using namespace xll;
 
 def add_in(cdecl, params, help, cat = "XLL"):
 	sep = ',\n\t\t'
-	return f'''
-AddIn xai_{cdecl["fun"]}(
-	Function({xll_type[cdecl["ret"]]}, "xll_{cdecl["fun"]}", "{cat}.{cdecl["fun"].upper()}")
+	return f'''AddIn xai_{cdecl["fun"]}(
+	Function({xll_type[cdecl["ret"]]}, "xll_{cat.lower()}_{cdecl["fun"]}", "{cat.upper()}.{cdecl["fun"].upper()}")
 	.Args({{
 		{sep.join(['Arg(' + xll_type[arg[0]] + ', "' + arg[1] + '", "' + params[arg[1]] + '")' for arg in cdecl["arg"]])}
 	}})
 	.FunctionHelp("{help}")
-	.Category("{cat}")
+	.Category("{cat.upper()}")
 );
-{cdecl["ret"]} WINAPI xll_{cdecl["fun"]}({cdecl["sig"]})
+{cdecl["ret"]} WINAPI xll_{cat.lower()}_{cdecl["fun"]}({cdecl["sig"]})
 {{
 #pragma XLLEXPORT
 
-	return {cdecl["fun"]}({', '.join([a[1] for a in cdecl["arg"]])});
+	return {ccall(cdecl)};
 }}
 	'''
 
-
-def test_add_in(cdecl, params, help, cat):
-	print(xll_prolog(cat))
-	print(add_in(cdecl, params, help, cat))
-
-if __name__ == '__main__':
-	cat = "Cmath"
-	decl = {
+def test_add_in():
+	cdecl = {
 		"ret": "void",
 		"fun": "foo",
 		"sig": 'int i, unsigned char c',
@@ -58,4 +52,14 @@ if __name__ == '__main__':
 		"i": "is an integer",
 		"c": "is a character",
 	}
-	test_add_in(decl, params, "Function help", "Cmath")
+	help = "Function help"
+	cat = "Cmath"
+	print(xll_prolog(cat))
+	print(add_in(cdecl, params, help, cat))
+
+if __name__ == '__main__':
+	#test_add_in()
+	for href in hrefs():
+		print(href)
+		page = page_html(href)
+		print(section_parameters(page))
