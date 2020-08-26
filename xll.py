@@ -12,14 +12,15 @@ xll_type = {
 	"double": "XLL_DOUBLE",
 }
 
-def add_in(cdecl, cat = "XLL"):
+def add_in(cdecl, params, help, cat = "XLL"):
 	sep = ',\n\t\t'
 	return f'''
 AddIn xai_{cdecl["fun"]}(
 	Function({xll_type[cdecl["ret"]]}, "xll_{cdecl["fun"]}", "{cat}.{cdecl["fun"].upper()}")
 	.Args({{
-		{sep.join(['Arg(' + xll_type[arg[0]] + ', "' + arg[1] + '", "desc")' for arg in cdecl["arg"]])}
+		{sep.join(['Arg(' + xll_type[arg[0]] + ', "' + arg[1] + '", "' + params[arg[1]] + '")' for arg in cdecl["arg"]])}
 	}})
+	.FunctionHelp("{help}")
 	.Category("{cat}")
 );
 {cdecl["ret"]} WINAPI xll_{cdecl["fun"]}({cdecl["sig"]})
@@ -31,8 +32,8 @@ AddIn xai_{cdecl["fun"]}(
 	'''
 
 
-def test_add_in(cdecl):
-	print(add_in(cdecl))
+def test_add_in(cdecl, params, help):
+	print(add_in(cdecl, params, help))
 
 if __name__ == '__main__':
 	decl = {
@@ -41,4 +42,8 @@ if __name__ == '__main__':
 		"sig": 'int i, unsigned char c',
 		"arg": [["int", "i"], ["unsigned char", "c"]]
     }
-	test_add_in(decl)
+	params = {
+		"i": "is an integer",
+		"c": "is a character",
+	}
+	test_add_in(decl, params, "Function help")
