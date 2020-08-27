@@ -102,6 +102,7 @@ def test_section_syntax():
 def section_parameters(page):
 	xparameters = '//*[@href="#parameters"]/parent::h3/following::p[./em and ./br]'
 	params = page.xpath(xparameters)
+	print(etree.tostring(params, pretty_print=True).decode('utf-8'))
 
 	# split on em to get key names
 	for i in params:
