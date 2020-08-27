@@ -231,22 +231,6 @@ double WINAPI xll_math_erf(double x)
 	return erf(x);
 }
 	
-AddIn xai_erf(
-	Function(XLL_DOUBLE, "xll_math_erf", "MATH.ERF")
-	.Args({
-		Arg(XLL_DOUBLE, "x", "A floating-point value.")
-	})
-	.FunctionHelp("Computes the error function or the complementary error function of a value.")
-	.Category("MATH")
-	.HelpTopic("https://github.com/MicrosoftDocs/cpp-docs/blob/master/docs/c-runtime-library/reference/erf-erff-erfl-erfc-erfcf-erfcl.md")
-);
-double WINAPI xll_math_erf(double x)
-{
-#pragma XLLEXPORT
-
-	return erf(x);
-}
-	
 AddIn xai_exp(
 	Function(XLL_DOUBLE, "xll_math_exp", "MATH.EXP")
 	.Args({
@@ -446,24 +430,6 @@ double WINAPI xll_math_frexp(double x, int* expptr)
 	return frexp(x, expptr);
 }
 	
-AddIn xai_*_gcvt(
-	Function(XLL_USHORT, "xll_math_*_gcvt", "MATH.*_GCVT")
-	.Args({
-		Arg(XLL_DOUBLE, "value", "Value to be converted."),
-		Arg(XLL_LONG, "digits", "Number of significant digits stored."),
-		Arg(XLL_CSTRING, "buffer", "Storage location for the result.")
-	})
-	.FunctionHelp("Converts a floating-point value to a string, which it stores in a buffer. A more secure version of this function is available; see _gcvt_s.")
-	.Category("MATH")
-	.HelpTopic("https://github.com/MicrosoftDocs/cpp-docs/blob/master/docs/c-runtime-library/reference/gcvt.md")
-);
-char WINAPI xll_math_*_gcvt(double value, int digits, char* buffer)
-{
-#pragma XLLEXPORT
-
-	return *_gcvt(value, digits, buffer);
-}
-	
 AddIn xai_hypot(
 	Function(XLL_DOUBLE, "xll_math_hypot", "MATH.HYPOT")
 	.Args({
@@ -495,22 +461,6 @@ int WINAPI xll_math_ilogb(double x)
 #pragma XLLEXPORT
 
 	return ilogb(x);
-}
-	
-AddIn xai__j0(
-	Function(XLL_DOUBLE, "xll_math__j0", "MATH._J0")
-	.Args({
-		Arg(XLL_DOUBLE, "x", "Floating-point value.")
-	})
-	.FunctionHelp("Computes the Bessel function of the first or second kind, of orders 0, 1, or n. The Bessel functions are commonly used in the mathematics of electromagnetic wave theory.")
-	.Category("MATH")
-	.HelpTopic("https://github.com/MicrosoftDocs/cpp-docs/blob/master/docs/c-runtime-library/reference/bessel-functions-j0-j1-jn-y0-y1-yn.md")
-);
-double WINAPI xll_math__j0(double x)
-{
-#pragma XLLEXPORT
-
-	return _j0(x);
 }
 	
 AddIn xai_ldexp(
@@ -657,23 +607,6 @@ double WINAPI xll_math_nearbyint(double x)
 #pragma XLLEXPORT
 
 	return nearbyint(x);
-}
-	
-AddIn xai_nextafter(
-	Function(XLL_DOUBLE, "xll_math_nextafter", "MATH.NEXTAFTER")
-	.Args({
-		Arg(XLL_DOUBLE, "x", "The floating-point value to start from."),
-		Arg(XLL_DOUBLE, "y", "The floating-point value to go towards.")
-	})
-	.FunctionHelp("Returns the next representable floating-point value.")
-	.Category("MATH")
-	.HelpTopic("https://github.com/MicrosoftDocs/cpp-docs/blob/master/docs/c-runtime-library/reference/nextafter-functions.md")
-);
-double WINAPI xll_math_nextafter(double x, double y)
-{
-#pragma XLLEXPORT
-
-	return nextafter(x, y);
 }
 	
 AddIn xai_nextafter(

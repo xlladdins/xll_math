@@ -17,7 +17,6 @@ https://github.com/MicrosoftDocs/cpp-docs/blob/master/docs/c-runtime-library/ref
 #https://github.com/MicrosoftDocs/cpp-docs/blob/master/docs/c-runtime-library/reference/ecvt.md
 #https://github.com/MicrosoftDocs/cpp-docs/blob/master/docs/c-runtime-library/reference/ecvt-s.md
 https://github.com/MicrosoftDocs/cpp-docs/blob/master/docs/c-runtime-library/reference/erf-erff-erfl-erfc-erfcf-erfcl.md
-https://github.com/MicrosoftDocs/cpp-docs/blob/master/docs/c-runtime-library/reference/erf-erff-erfl-erfc-erfcf-erfcl.md
 https://github.com/MicrosoftDocs/cpp-docs/blob/master/docs/c-runtime-library/reference/exp-expf.md
 https://github.com/MicrosoftDocs/cpp-docs/blob/master/docs/c-runtime-library/reference/exp2-exp2f-exp2l.md
 https://github.com/MicrosoftDocs/cpp-docs/blob/master/docs/c-runtime-library/reference/expm1-expm1f-expm1l.md
@@ -34,7 +33,7 @@ https://github.com/MicrosoftDocs/cpp-docs/blob/master/docs/c-runtime-library/ref
 # use fpclass to get finer grained information
 #https://github.com/MicrosoftDocs/cpp-docs/blob/master/docs/c-runtime-library/reference/fpclassify.md
 https://github.com/MicrosoftDocs/cpp-docs/blob/master/docs/c-runtime-library/reference/frexp.md
-https://github.com/MicrosoftDocs/cpp-docs/blob/master/docs/c-runtime-library/reference/gcvt.md
+#https://github.com/MicrosoftDocs/cpp-docs/blob/master/docs/c-runtime-library/reference/gcvt.md
 #https://github.com/MicrosoftDocs/cpp-docs/blob/master/docs/c-runtime-library/reference/gcvt-s.md
 https://github.com/MicrosoftDocs/cpp-docs/blob/master/docs/c-runtime-library/reference/hypot-hypotf-hypotl-hypot-hypotf-hypotl.md
 https://github.com/MicrosoftDocs/cpp-docs/blob/master/docs/c-runtime-library/reference/ilogb-ilogbf-ilogbl2.md
@@ -45,7 +44,6 @@ https://github.com/MicrosoftDocs/cpp-docs/blob/master/docs/c-runtime-library/ref
 #https://github.com/MicrosoftDocs/cpp-docs/blob/master/docs/c-runtime-library/reference/isinf.md
 #https://github.com/MicrosoftDocs/cpp-docs/blob/master/docs/c-runtime-library/reference/isnan-isnan-isnanf.md
 #https://github.com/MicrosoftDocs/cpp-docs/blob/master/docs/c-runtime-library/reference/isnormal.md
-https://github.com/MicrosoftDocs/cpp-docs/blob/master/docs/c-runtime-library/reference/bessel-functions-j0-j1-jn-y0-y1-yn.md
 https://github.com/MicrosoftDocs/cpp-docs/blob/master/docs/c-runtime-library/reference/ldexp.md
 https://github.com/MicrosoftDocs/cpp-docs/blob/master/docs/c-runtime-library/reference/lgamma-lgammaf-lgammal.md
 https://github.com/MicrosoftDocs/cpp-docs/blob/master/docs/c-runtime-library/reference/log-logf-log10-log10f.md
@@ -55,7 +53,6 @@ https://github.com/MicrosoftDocs/cpp-docs/blob/master/docs/c-runtime-library/ref
 https://github.com/MicrosoftDocs/cpp-docs/blob/master/docs/c-runtime-library/reference/modf-modff-modfl.md
 https://github.com/MicrosoftDocs/cpp-docs/blob/master/docs/c-runtime-library/reference/nan-nanf-nanl.md
 https://github.com/MicrosoftDocs/cpp-docs/blob/master/docs/c-runtime-library/reference/nearbyint-nearbyintf-nearbyintl1.md
-https://github.com/MicrosoftDocs/cpp-docs/blob/master/docs/c-runtime-library/reference/nextafter-functions.md
 https://github.com/MicrosoftDocs/cpp-docs/blob/master/docs/c-runtime-library/reference/nextafter-functions.md
 https://github.com/MicrosoftDocs/cpp-docs/blob/master/docs/c-runtime-library/reference/pow-powf-powl.md
 https://github.com/MicrosoftDocs/cpp-docs/blob/master/docs/c-runtime-library/reference/remainder-remainderf-remainderl.md

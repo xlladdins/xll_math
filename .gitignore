@@ -30,3 +30,9 @@
 *.exe
 *.out
 *.app
+/.cache/v/cache
+/.vs
+/Debug
+/x64/Debug
+/__pycache__
+/.Makefile.swp
