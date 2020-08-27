@@ -79,8 +79,8 @@ def section_function_help(page):
 
 	return ''.join(help[0].itertext())
 
-def test_section_function_help():
-	page = page_html(ref_url + fun_item)
+def test_section_function_help(url):
+	page = page_html(url)
 	ret = section_function_help(page)
 	print(ret)
 
@@ -94,28 +94,36 @@ def section_syntax(page):
 
 	return text.split(';\n')
 
-def test_section_syntax():
-	page = page_html(ref_url + fun_item)
+def test_section_syntax(url):
+	page = page_html(url)
 	ret = section_syntax(page)
 	print(ret)
 
 def section_parameters(page):
 	xparameters = '//*[@href="#parameters"]/parent::h3/following::p[./em and ./br]'
+	
+	keys = [key.text for key in page.xpath(xparameters + "/em")]
+
 	params = page.xpath(xparameters)
-	print(etree.tostring(params, pretty_print=True).decode('utf-8'))
+	vals = []
+	for p in params:
+		#print(etree.tostring(p, pretty_print=True).decode('utf-8'))
+		etree.strip_elements(p, 'em')
+		etree.strip_tags(p, "*")
+		vals.append(p.text.strip())
 
-	# split on em to get key names
-	for i in params:
-		print(list(i.itertext()))
+	# use last value if short
+	return {keys[i]:vals[i if i < len(vals) else -1] for i in range(len(keys))}
 
-	return {k:v.strip() for (k,v) in [list(i.itertext()) for i in params]}
-
-def test_section_parameters():
-	page = page_html(ref_url + fun_item)
+def test_section_parameters(url):
+	page = page_html(url)
 	ret = section_parameters(page)
 	print(ret)
 
-test_url = "https://github.com/MicrosoftDocs/cpp-docs/blob/master/docs/c-runtime-library/reference/atan-atanf-atanl-atan2-atan2f-atan2l.md"
+#test_url = "https://github.com/MicrosoftDocs/cpp-docs/blob/master/docs/c-runtime-library/reference/atan-atanf-atanl-atan2-atan2f-atan2l.md"
+#test_url = "https://github.com/MicrosoftDocs/cpp-docs/blob/master/docs/c-runtime-library/reference/ldexp.md"
+#test_url = "https://github.com/MicrosoftDocs/cpp-docs/blob/master/docs/c-runtime-library/reference/atof-atof-l-wtof-wtof-l.md"
+test_url = "https://github.com/MicrosoftDocs/cpp-docs/blob/master/docs/c-runtime-library/reference/atof-atof-l-wtof-wtof-l.md"
 
 if __name__ == '__main__':
 	none = None
@@ -124,11 +132,12 @@ if __name__ == '__main__':
 	#test_section_href()
 
 	#test_section_function_help()
-	#test_section_syntax()
-	#test_section_parameters()
+	#test_section_syntax(test_url)
+	test_section_parameters(test_url)
 
-	page = page_html(test_url)
-	print(section_parameters(page))
+	#page = page_html(test_url)
+	#x = section_parameters(page)
+	#print(x)
 	#print(etree.tostring(page, pretty_print=True).decode('utf-8'))
 	#print (page)
 	#x = section_parameters(page)

@@ -5,16 +5,18 @@ import re
 
 # "ret fun(type arg, ...)"
 # {ret, fun, sig, arg: [[type, name], ...]}
+#!!! check for '/* floating-point */'???
 def cdecl(text):
 	# sig leading and trailing spaces are trimmed
-	cre =r'\s*(?P<ret>\S+)\s+(?P<fun>\S+)(?<=\s)*\(\s*(?P<sig>.*?)\s*\)'
+	cre =r'\s*(?P<ret>.*?)\s+(?P<fun>\S+)(?<=\s)*\(\s*(?P<sig>.*?)\s*\)'
 	m = re.match(cre, text)
 	ret = m.groupdict().copy()
 	# normalize sig
 	ret["sig"] = re.sub(r'\s+', ' ', ret["sig"])
 	ret["sig"] = re.sub(r'\s+\(\s*', '(', ret["sig"])
 	ret["sig"] = re.sub(r'\s+\)\s*', ')', ret["sig"])
-	ret["sig"] = re.sub(r'\s+,\s+', ', ', ret["sig"])
+	ret["sig"] = re.sub(r'\s*,\s*', ', ', ret["sig"])
+	ret["sig"] = re.sub(r'\s*\*\s*', '* ', ret["sig"])
 	ret['arg'] = [list(re.match(r'(.*)\s+(\S+)|', a).groups()) for a in re.split(r'\s*,\s*', ret['sig'])]
 
 	return ret

@@ -1,29 +1,38 @@
 #!/usr/bin/python3
 # Generate C++ files to be used with the xll library
-from cdecl import ccall
+from cdecl import ccall, cdecl
 from ms_cpp_docs import page_html, hrefs, section_function_help, section_syntax, section_parameters
 
 xll_type = {
 	"void": "XLL_VOID",
 	"int": "XLL_LONG",
+	"unsigned int": "XLL_LONG",
+	"int*": "XLL_LONG_",
 	"long": "XLL_LONG",
+	"unsigned long": "XLL_LONG",
+	"long*": "XLL_LONG_",
 	"short": "XLL_SHORT",
-	"unsigned short": "XLL_USHORT",
+	"const char": "XLL_USHORT",
 	"char": "XLL_USHORT",
+	"char*": "XLL_CSTRING",
+	"const char*": "XLL_CSTRING",
+	"unsigned short": "XLL_USHORT",
 	"unsigned char": "XLL_USHORT",
 	"double": "XLL_DOUBLE",
+	"double*": "XLL_DOUBLE_",
 }
 
 def xll_prolog(cat):
 	return f'''// xll_{cat.lower()}.cpp - Excel add-in for functions in the {cat} category.
 // Uncomment to build for pre 2007 Excel
 //#define XLOPERX XLOPER
+#include <cmath>
 #include "xll/xll/xll.h"
 
 using namespace xll;
 	'''
 
-def add_in(cdecl, params, help, cat = "XLL"):
+def add_in(cdecl, params, help, cat, url):
 	sep = ',\n\t\t'
 	return f'''AddIn xai_{cdecl["fun"]}(
 	Function({xll_type[cdecl["ret"]]}, "xll_{cat.lower()}_{cdecl["fun"]}", "{cat.upper()}.{cdecl["fun"].upper()}")
@@ -32,6 +41,7 @@ def add_in(cdecl, params, help, cat = "XLL"):
 	}})
 	.FunctionHelp("{help}")
 	.Category("{cat.upper()}")
+	.HelpTopic("{url}")
 );
 {cdecl["ret"]} WINAPI xll_{cat.lower()}_{cdecl["fun"]}({cdecl["sig"]})
 {{
@@ -55,11 +65,22 @@ def test_add_in():
 	help = "Function help"
 	cat = "Cmath"
 	print(xll_prolog(cat))
-	print(add_in(cdecl, params, help, cat))
+	print(add_in(cdecl, params, help, cat, "https://google.com"))
 
 if __name__ == '__main__':
 	#test_add_in()
-	for href in hrefs():
-		print(href)
+	cat = "math"
+	with open('crt_ref.txt') as f:
+		hrefs = [line.strip() for line in f if line[0] != '#']
+
+	print(xll_prolog(cat))
+	for href in hrefs:
+		#print(href)
 		page = page_html(href)
-		print(section_parameters(page))
+		syntax = section_syntax(page)
+		decl = cdecl(syntax[0])
+		#print(decl)
+		params = section_parameters(page)
+		#print(params)
+		help = section_function_help(page)
+		print(add_in(decl, params, help, cat, href))
