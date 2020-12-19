@@ -1,25 +1,26 @@
 # XML
 
-eXtensible Markup Language documents are _text_, a string of (UTF-8) characters.
-_Well-formed_ documents can be _parsed_ into a _tree_ of _elements_.
+eXtensible Markup Language documents are a string of (UTF-8) characters.
+_Well-formed_ documents can be _parsed_ into a _sequence_ of _elements_. The
+_content_ of an element is a sequence of zero or items that can be elements,
+_text_, _entities_, or a _comment_.
 
-If text starts with a less-than (`<`) character then the following
+If the string starts with a less-than (`<`) character then the following
 non-space characters are the _name_ of the element. Any characters after that up to
 a greater-than ('>') character specify the _attributes_ of the element.
 Every attribute is a _key-value pair_ of the form `key="value"` and are
-separated by one or more whitespace characters:
-space (` `), tab (`\t`), newline (`\n`), or carriage return (`\r`).
+separated by one or more whitespace characters.
 If the closing greater-than character is preceeded by a _forward slash_ ('/')
 then the element has no _content_. Otherwise all text up to the next matching
-_end tag_ is the content of the element. End tags have the form `</`_name_`>`
+_end tag_ determines the content of the element. End tags have the form `</`_name_`>`
 and never contain attributes.
 
-Text not starting with a less-than character is _content_. 
-Content is a sequence of zero or more strings or elements
-that are the _children_ of the enclosing element. Every
-well-formed document begins with an element, the _root element_.
-
-These rules define the tree structure of an XML document.
+If the content string starts with a less-than character then the next item in the
+sequence is an element and parsing proceeds as above.
+Content not starting with a less-than character is either _text_, an _entity_, or a _comment_. 
+Entities start with the ampersand (`&`) character and end with a semicolon (`;`).
+Comments start with the string `<!--` and end with the string `-->`. Otherwise the
+item is text.
 
 ## Syntax
 

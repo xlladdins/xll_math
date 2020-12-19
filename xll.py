@@ -37,13 +37,19 @@ using namespace xll;
 
 def add_in(cdecl, params, help, cat, url):
 	sep = ',\n\t\t'
-	return f'''AddIn xai_{cdecl["fun"]}(
-	Function({xll_type[cdecl["ret"]]}, "xll_{cat.lower()}_{cdecl["fun"]}", "{cat.upper()}.{cdecl["fun"].upper()}")
+	ret = xll_type[cdecl["ret"]]
+	fun = cdecl["fun"]
+	cat = cat.lower()
+	CAT = cat.upper()
+	args = cdecl["arg"]
+	Arg = ['Arg(' + xll_type[arg[0]] + ', "' + arg[1] + '", "' + params[arg[1]] + '")' for arg in cdecl["arg"]]
+	return f'''AddIn xai_{"fun"}(
+	Function({ret}, "xll_{cat}_{fun}", "{CAT}.{fun.upper()}")
 	.Args({{
-		{sep.join(['Arg(' + xll_type[arg[0]] + ', "' + arg[1] + '", "' + params[arg[1]] + '")' for arg in cdecl["arg"]])}
+		{sep.join(Arg)]
 	}})
 	.FunctionHelp("{help}")
-	.Category("{cat.upper()}")
+	.Category("{CAT}")
 	.HelpTopic("{url}")
 );
 {cdecl["ret"]} WINAPI xll_{cat.lower()}_{cdecl["fun"]}({cdecl["sig"]})
