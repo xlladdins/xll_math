@@ -3,6 +3,9 @@
 from cdecl import ccall, cdecl
 from ms_cpp_docs import page_html, hrefs, section_function_help, section_syntax, section_parameters
 
+docs_url = 'https://docs.microsoft.com/en-us/cpp/c-runtime-library/reference/' 
+git_url = 'https://github.com/MicrosoftDocs/cpp-docs/blob/master/docs/c-runtime-library/reference/'
+
 xll_type = {
 	"void": "XLL_VOID",
 	"int": "XLL_LONG",
@@ -76,11 +79,11 @@ if __name__ == '__main__':
 	print(xll_prolog(cat))
 	for href in hrefs:
 		#print(href)
-		page = page_html(href)
+		page = page_html(git_url + href + '.md')
 		syntax = section_syntax(page)
 		decl = cdecl(syntax[0])
 		#print(decl)
 		params = section_parameters(page)
 		#print(params)
 		help = section_function_help(page)
-		print(add_in(decl, params, help, cat, href))
+		print(add_in(decl, params, help, cat, docs_url + href))

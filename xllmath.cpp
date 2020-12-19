@@ -13,7 +13,7 @@ AddIn xai_abs(
 	})
 	.FunctionHelp("Calculates the absolute value of the argument.")
 	.Category("MATH")
-	.HelpTopic("https://github.com/MicrosoftDocs/cpp-docs/blob/master/docs/c-runtime-library/reference/abs-labs-llabs-abs64.md")
+	.HelpTopic("https://docs.microsoft.com/en-us/cpp/c-runtime-library/reference/abs-labs-llabs-abs64")
 );
 int WINAPI xll_math_abs(int n)
 {
@@ -29,7 +29,7 @@ AddIn xai_acos(
 	})
 	.FunctionHelp("Calculates the arccosine.")
 	.Category("MATH")
-	.HelpTopic("https://github.com/MicrosoftDocs/cpp-docs/blob/master/docs/c-runtime-library/reference/acos-acosf-acosl.md")
+	.HelpTopic("https://docs.microsoft.com/en-us/cpp/c-runtime-library/reference/acos-acosf-acosl")
 );
 double WINAPI xll_math_acos(double x)
 {
@@ -45,7 +45,7 @@ AddIn xai_acosh(
 	})
 	.FunctionHelp("Calculates the inverse hyperbolic cosine.")
 	.Category("MATH")
-	.HelpTopic("https://github.com/MicrosoftDocs/cpp-docs/blob/master/docs/c-runtime-library/reference/acosh-acoshf-acoshl.md")
+	.HelpTopic("https://docs.microsoft.com/en-us/cpp/c-runtime-library/reference/acosh-acoshf-acoshl")
 );
 double WINAPI xll_math_acosh(double x)
 {
@@ -61,7 +61,7 @@ AddIn xai_asin(
 	})
 	.FunctionHelp("Calculates the arcsine.")
 	.Category("MATH")
-	.HelpTopic("https://github.com/MicrosoftDocs/cpp-docs/blob/master/docs/c-runtime-library/reference/asin-asinf-asinl.md")
+	.HelpTopic("https://docs.microsoft.com/en-us/cpp/c-runtime-library/reference/asin-asinf-asinl")
 );
 double WINAPI xll_math_asin(double x)
 {
@@ -77,7 +77,7 @@ AddIn xai_asinh(
 	})
 	.FunctionHelp("Calculates the inverse hyperbolic sine.")
 	.Category("MATH")
-	.HelpTopic("https://github.com/MicrosoftDocs/cpp-docs/blob/master/docs/c-runtime-library/reference/asinh-asinhf-asinhl.md")
+	.HelpTopic("https://docs.microsoft.com/en-us/cpp/c-runtime-library/reference/asinh-asinhf-asinhl")
 );
 double WINAPI xll_math_asinh(double x)
 {
@@ -93,7 +93,7 @@ AddIn xai_atan(
 	})
 	.FunctionHelp("Calculates the arctangent of x (atan, atanf, and atanl) or the arctangent of y/x (atan2, atan2f, and atan2l).")
 	.Category("MATH")
-	.HelpTopic("https://github.com/MicrosoftDocs/cpp-docs/blob/master/docs/c-runtime-library/reference/atan-atanf-atanl-atan2-atan2f-atan2l.md")
+	.HelpTopic("https://docs.microsoft.com/en-us/cpp/c-runtime-library/reference/atan-atanf-atanl-atan2-atan2f-atan2l")
 );
 double WINAPI xll_math_atan(double x)
 {
@@ -109,7 +109,7 @@ AddIn xai_atanh(
 	})
 	.FunctionHelp("Calculates the inverse hyperbolic tangent.")
 	.Category("MATH")
-	.HelpTopic("https://github.com/MicrosoftDocs/cpp-docs/blob/master/docs/c-runtime-library/reference/atanh-atanhf-atanhl.md")
+	.HelpTopic("https://docs.microsoft.com/en-us/cpp/c-runtime-library/reference/atanh-atanhf-atanhl")
 );
 double WINAPI xll_math_atanh(double x)
 {
@@ -125,7 +125,7 @@ AddIn xai_cbrt(
 	})
 	.FunctionHelp("Calculates the cube root.")
 	.Category("MATH")
-	.HelpTopic("https://github.com/MicrosoftDocs/cpp-docs/blob/master/docs/c-runtime-library/reference/cbrt-cbrtf-cbrtl.md")
+	.HelpTopic("https://docs.microsoft.com/en-us/cpp/c-runtime-library/reference/cbrt-cbrtf-cbrtl")
 );
 double WINAPI xll_math_cbrt(double x)
 {
@@ -141,7 +141,7 @@ AddIn xai_ceil(
 	})
 	.FunctionHelp("Calculates the ceiling of a value.")
 	.Category("MATH")
-	.HelpTopic("https://github.com/MicrosoftDocs/cpp-docs/blob/master/docs/c-runtime-library/reference/ceil-ceilf-ceill.md")
+	.HelpTopic("https://docs.microsoft.com/en-us/cpp/c-runtime-library/reference/ceil-ceilf-ceill")
 );
 double WINAPI xll_math_ceil(double x)
 {
@@ -157,7 +157,7 @@ AddIn xai__chgsign(
 	})
 	.FunctionHelp("Reverses the sign of a floating-point argument.")
 	.Category("MATH")
-	.HelpTopic("https://github.com/MicrosoftDocs/cpp-docs/blob/master/docs/c-runtime-library/reference/chgsign-chgsignf-chgsignl.md")
+	.HelpTopic("https://docs.microsoft.com/en-us/cpp/c-runtime-library/reference/chgsign-chgsignf-chgsignl")
 );
 double WINAPI xll_math__chgsign(double x)
 {
@@ -174,7 +174,7 @@ AddIn xai_copysign(
 	})
 	.FunctionHelp("Returns a value that has the magnitude of one argument and the sign of another.")
 	.Category("MATH")
-	.HelpTopic("https://github.com/MicrosoftDocs/cpp-docs/blob/master/docs/c-runtime-library/reference/copysign-copysignf-copysignl-copysign-copysignf-copysignl.md")
+	.HelpTopic("https://docs.microsoft.com/en-us/cpp/c-runtime-library/reference/copysign-copysignf-copysignl-copysign-copysignf-copysignl")
 );
 double WINAPI xll_math_copysign(double x, double y)
 {
@@ -190,7 +190,7 @@ AddIn xai_cos(
 	})
 	.FunctionHelp("Calculates the cosine.")
 	.Category("MATH")
-	.HelpTopic("https://github.com/MicrosoftDocs/cpp-docs/blob/master/docs/c-runtime-library/reference/cos-cosf-cosl.md")
+	.HelpTopic("https://docs.microsoft.com/en-us/cpp/c-runtime-library/reference/cos-cosf-cosl")
 );
 double WINAPI xll_math_cos(double x)
 {
@@ -206,7 +206,7 @@ AddIn xai_cosh(
 	})
 	.FunctionHelp("Calculates the hyperbolic cosine.")
 	.Category("MATH")
-	.HelpTopic("https://github.com/MicrosoftDocs/cpp-docs/blob/master/docs/c-runtime-library/reference/cosh-coshf-coshl.md")
+	.HelpTopic("https://docs.microsoft.com/en-us/cpp/c-runtime-library/reference/cosh-coshf-coshl")
 );
 double WINAPI xll_math_cosh(double x)
 {
@@ -222,7 +222,7 @@ AddIn xai_erf(
 	})
 	.FunctionHelp("Computes the error function or the complementary error function of a value.")
 	.Category("MATH")
-	.HelpTopic("https://github.com/MicrosoftDocs/cpp-docs/blob/master/docs/c-runtime-library/reference/erf-erff-erfl-erfc-erfcf-erfcl.md")
+	.HelpTopic("https://docs.microsoft.com/en-us/cpp/c-runtime-library/reference/erf-erff-erfl-erfc-erfcf-erfcl")
 );
 double WINAPI xll_math_erf(double x)
 {
@@ -238,7 +238,7 @@ AddIn xai_exp(
 	})
 	.FunctionHelp("Calculates the exponential.")
 	.Category("MATH")
-	.HelpTopic("https://github.com/MicrosoftDocs/cpp-docs/blob/master/docs/c-runtime-library/reference/exp-expf.md")
+	.HelpTopic("https://docs.microsoft.com/en-us/cpp/c-runtime-library/reference/exp-expf")
 );
 double WINAPI xll_math_exp(double x)
 {
@@ -254,7 +254,7 @@ AddIn xai_exp2(
 	})
 	.FunctionHelp("Computes 2 raised to the specified value.")
 	.Category("MATH")
-	.HelpTopic("https://github.com/MicrosoftDocs/cpp-docs/blob/master/docs/c-runtime-library/reference/exp2-exp2f-exp2l.md")
+	.HelpTopic("https://docs.microsoft.com/en-us/cpp/c-runtime-library/reference/exp2-exp2f-exp2l")
 );
 double WINAPI xll_math_exp2(double x)
 {
@@ -270,7 +270,7 @@ AddIn xai_expm1(
 	})
 	.FunctionHelp("Computes the base-e exponential of a value, minus one.")
 	.Category("MATH")
-	.HelpTopic("https://github.com/MicrosoftDocs/cpp-docs/blob/master/docs/c-runtime-library/reference/expm1-expm1f-expm1l.md")
+	.HelpTopic("https://docs.microsoft.com/en-us/cpp/c-runtime-library/reference/expm1-expm1f-expm1l")
 );
 double WINAPI xll_math_expm1(double x)
 {
@@ -286,7 +286,7 @@ AddIn xai_fabs(
 	})
 	.FunctionHelp("Calculates the absolute value of the floating-point argument.")
 	.Category("MATH")
-	.HelpTopic("https://github.com/MicrosoftDocs/cpp-docs/blob/master/docs/c-runtime-library/reference/fabs-fabsf-fabsl.md")
+	.HelpTopic("https://docs.microsoft.com/en-us/cpp/c-runtime-library/reference/fabs-fabsf-fabsl")
 );
 double WINAPI xll_math_fabs(double x)
 {
@@ -303,7 +303,7 @@ AddIn xai_fdim(
 	})
 	.FunctionHelp("Determines the positive difference between the first and second values.")
 	.Category("MATH")
-	.HelpTopic("https://github.com/MicrosoftDocs/cpp-docs/blob/master/docs/c-runtime-library/reference/fdim-fdimf-fdiml.md")
+	.HelpTopic("https://docs.microsoft.com/en-us/cpp/c-runtime-library/reference/fdim-fdimf-fdiml")
 );
 double WINAPI xll_math_fdim(double x, double y)
 {
@@ -319,7 +319,7 @@ AddIn xai_floor(
 	})
 	.FunctionHelp("Calculates the floor of a value.")
 	.Category("MATH")
-	.HelpTopic("https://github.com/MicrosoftDocs/cpp-docs/blob/master/docs/c-runtime-library/reference/floor-floorf-floorl.md")
+	.HelpTopic("https://docs.microsoft.com/en-us/cpp/c-runtime-library/reference/floor-floorf-floorl")
 );
 double WINAPI xll_math_floor(double x)
 {
@@ -335,9 +335,9 @@ AddIn xai_fma(
 		Arg(XLL_DOUBLE, "y", "The second value to multiply."),
 		Arg(XLL_DOUBLE, "z", "The value to add.")
 	})
-	.FunctionHelp("Multiplies two values together,  adds a third value, and then rounds the result, without losing any precision due to intermediary rounding.")
+	.FunctionHelp("Multiplies two values together, adds a third value, and then rounds the result, without losing any precision due to intermediary rounding.")
 	.Category("MATH")
-	.HelpTopic("https://github.com/MicrosoftDocs/cpp-docs/blob/master/docs/c-runtime-library/reference/fma-fmaf-fmal.md")
+	.HelpTopic("https://docs.microsoft.com/en-us/cpp/c-runtime-library/reference/fma-fmaf-fmal")
 );
 double WINAPI xll_math_fma(double x, double y, double z)
 {
@@ -354,7 +354,7 @@ AddIn xai_fmax(
 	})
 	.FunctionHelp("Determine the larger of two specified numeric values.")
 	.Category("MATH")
-	.HelpTopic("https://github.com/MicrosoftDocs/cpp-docs/blob/master/docs/c-runtime-library/reference/fmax-fmaxf-fmaxl.md")
+	.HelpTopic("https://docs.microsoft.com/en-us/cpp/c-runtime-library/reference/fmax-fmaxf-fmaxl")
 );
 double WINAPI xll_math_fmax(double x, double y)
 {
@@ -371,7 +371,7 @@ AddIn xai_fmin(
 	})
 	.FunctionHelp("Determines the smaller of the two specified values.")
 	.Category("MATH")
-	.HelpTopic("https://github.com/MicrosoftDocs/cpp-docs/blob/master/docs/c-runtime-library/reference/fmin-fminf-fminl.md")
+	.HelpTopic("https://docs.microsoft.com/en-us/cpp/c-runtime-library/reference/fmin-fminf-fminl")
 );
 double WINAPI xll_math_fmin(double x, double y)
 {
@@ -388,7 +388,7 @@ AddIn xai_fmod(
 	})
 	.FunctionHelp("Calculates the floating-point remainder.")
 	.Category("MATH")
-	.HelpTopic("https://github.com/MicrosoftDocs/cpp-docs/blob/master/docs/c-runtime-library/reference/fmod-fmodf.md")
+	.HelpTopic("https://docs.microsoft.com/en-us/cpp/c-runtime-library/reference/fmod-fmodf")
 );
 double WINAPI xll_math_fmod(double x, double y)
 {
@@ -404,7 +404,7 @@ AddIn xai__fpclass(
 	})
 	.FunctionHelp("Returns a value indicating the floating-point classification of the argument.")
 	.Category("MATH")
-	.HelpTopic("https://github.com/MicrosoftDocs/cpp-docs/blob/master/docs/c-runtime-library/reference/fpclass-fpclassf.md")
+	.HelpTopic("https://docs.microsoft.com/en-us/cpp/c-runtime-library/reference/fpclass-fpclassf")
 );
 int WINAPI xll_math__fpclass(double x)
 {
@@ -421,7 +421,7 @@ AddIn xai_frexp(
 	})
 	.FunctionHelp("Gets the mantissa and exponent of a floating-point number.")
 	.Category("MATH")
-	.HelpTopic("https://github.com/MicrosoftDocs/cpp-docs/blob/master/docs/c-runtime-library/reference/frexp.md")
+	.HelpTopic("https://docs.microsoft.com/en-us/cpp/c-runtime-library/reference/frexp")
 );
 double WINAPI xll_math_frexp(double x, int* expptr)
 {
@@ -438,7 +438,7 @@ AddIn xai_hypot(
 	})
 	.FunctionHelp("Calculates the hypotenuse.")
 	.Category("MATH")
-	.HelpTopic("https://github.com/MicrosoftDocs/cpp-docs/blob/master/docs/c-runtime-library/reference/hypot-hypotf-hypotl-hypot-hypotf-hypotl.md")
+	.HelpTopic("https://docs.microsoft.com/en-us/cpp/c-runtime-library/reference/hypot-hypotf-hypotl-hypot-hypotf-hypotl")
 );
 double WINAPI xll_math_hypot(double x, double y)
 {
@@ -454,7 +454,7 @@ AddIn xai_ilogb(
 	})
 	.FunctionHelp("Retrieves an integer that represents the unbiased base-2 exponent of the specified value.")
 	.Category("MATH")
-	.HelpTopic("https://github.com/MicrosoftDocs/cpp-docs/blob/master/docs/c-runtime-library/reference/ilogb-ilogbf-ilogbl2.md")
+	.HelpTopic("https://docs.microsoft.com/en-us/cpp/c-runtime-library/reference/ilogb-ilogbf-ilogbl2")
 );
 int WINAPI xll_math_ilogb(double x)
 {
@@ -471,7 +471,7 @@ AddIn xai_ldexp(
 	})
 	.FunctionHelp("Multiplies a floating-point number by an integral power of two.")
 	.Category("MATH")
-	.HelpTopic("https://github.com/MicrosoftDocs/cpp-docs/blob/master/docs/c-runtime-library/reference/ldexp.md")
+	.HelpTopic("https://docs.microsoft.com/en-us/cpp/c-runtime-library/reference/ldexp")
 );
 double WINAPI xll_math_ldexp(double x, int exp)
 {
@@ -487,7 +487,7 @@ AddIn xai_lgamma(
 	})
 	.FunctionHelp("Determines the natural logarithm of the absolute value of the gamma function of the specified value.")
 	.Category("MATH")
-	.HelpTopic("https://github.com/MicrosoftDocs/cpp-docs/blob/master/docs/c-runtime-library/reference/lgamma-lgammaf-lgammal.md")
+	.HelpTopic("https://docs.microsoft.com/en-us/cpp/c-runtime-library/reference/lgamma-lgammaf-lgammal")
 );
 double WINAPI xll_math_lgamma(double x)
 {
@@ -503,7 +503,7 @@ AddIn xai_log(
 	})
 	.FunctionHelp("Calculates logarithms.")
 	.Category("MATH")
-	.HelpTopic("https://github.com/MicrosoftDocs/cpp-docs/blob/master/docs/c-runtime-library/reference/log-logf-log10-log10f.md")
+	.HelpTopic("https://docs.microsoft.com/en-us/cpp/c-runtime-library/reference/log-logf-log10-log10f")
 );
 double WINAPI xll_math_log(double x)
 {
@@ -519,7 +519,7 @@ AddIn xai_log1p(
 	})
 	.FunctionHelp("Computes the natural logarithm of 1 plus the specified value.")
 	.Category("MATH")
-	.HelpTopic("https://github.com/MicrosoftDocs/cpp-docs/blob/master/docs/c-runtime-library/reference/log1p-log1pf-log1pl2.md")
+	.HelpTopic("https://docs.microsoft.com/en-us/cpp/c-runtime-library/reference/log1p-log1pf-log1pl2")
 );
 double WINAPI xll_math_log1p(double x)
 {
@@ -535,7 +535,7 @@ AddIn xai_log2(
 	})
 	.FunctionHelp("Determines the binary (base-2) logarithm of the specified value.")
 	.Category("MATH")
-	.HelpTopic("https://github.com/MicrosoftDocs/cpp-docs/blob/master/docs/c-runtime-library/reference/log2-log2f-log2l.md")
+	.HelpTopic("https://docs.microsoft.com/en-us/cpp/c-runtime-library/reference/log2-log2f-log2l")
 );
 double WINAPI xll_math_log2(double x)
 {
@@ -551,7 +551,7 @@ AddIn xai_logb(
 	})
 	.FunctionHelp("Extracts the exponent value of a floating-point argument.")
 	.Category("MATH")
-	.HelpTopic("https://github.com/MicrosoftDocs/cpp-docs/blob/master/docs/c-runtime-library/reference/logb-logbf-logbl-logb-logbf.md")
+	.HelpTopic("https://docs.microsoft.com/en-us/cpp/c-runtime-library/reference/logb-logbf-logbl-logb-logbf")
 );
 double WINAPI xll_math_logb(double x)
 {
@@ -568,7 +568,7 @@ AddIn xai_modf(
 	})
 	.FunctionHelp("Splits a floating-point value into fractional and integer parts.")
 	.Category("MATH")
-	.HelpTopic("https://github.com/MicrosoftDocs/cpp-docs/blob/master/docs/c-runtime-library/reference/modf-modff-modfl.md")
+	.HelpTopic("https://docs.microsoft.com/en-us/cpp/c-runtime-library/reference/modf-modff-modfl")
 );
 double WINAPI xll_math_modf(double x, double* intptr)
 {
@@ -584,7 +584,7 @@ AddIn xai_nan(
 	})
 	.FunctionHelp("Returns a quiet NaN value.")
 	.Category("MATH")
-	.HelpTopic("https://github.com/MicrosoftDocs/cpp-docs/blob/master/docs/c-runtime-library/reference/nan-nanf-nanl.md")
+	.HelpTopic("https://docs.microsoft.com/en-us/cpp/c-runtime-library/reference/nan-nanf-nanl")
 );
 double WINAPI xll_math_nan(const char* input)
 {
@@ -600,7 +600,7 @@ AddIn xai_nearbyint(
 	})
 	.FunctionHelp("Rounds the specified floating-point value to an integer, and returns that value in a floating-point format.")
 	.Category("MATH")
-	.HelpTopic("https://github.com/MicrosoftDocs/cpp-docs/blob/master/docs/c-runtime-library/reference/nearbyint-nearbyintf-nearbyintl1.md")
+	.HelpTopic("https://docs.microsoft.com/en-us/cpp/c-runtime-library/reference/nearbyint-nearbyintf-nearbyintl1")
 );
 double WINAPI xll_math_nearbyint(double x)
 {
@@ -617,7 +617,7 @@ AddIn xai_nextafter(
 	})
 	.FunctionHelp("Returns the next representable floating-point value.")
 	.Category("MATH")
-	.HelpTopic("https://github.com/MicrosoftDocs/cpp-docs/blob/master/docs/c-runtime-library/reference/nextafter-functions.md")
+	.HelpTopic("https://docs.microsoft.com/en-us/cpp/c-runtime-library/reference/nextafter-functions")
 );
 double WINAPI xll_math_nextafter(double x, double y)
 {
@@ -634,7 +634,7 @@ AddIn xai_pow(
 	})
 	.FunctionHelp("Calculates x raised to the power of y.")
 	.Category("MATH")
-	.HelpTopic("https://github.com/MicrosoftDocs/cpp-docs/blob/master/docs/c-runtime-library/reference/pow-powf-powl.md")
+	.HelpTopic("https://docs.microsoft.com/en-us/cpp/c-runtime-library/reference/pow-powf-powl")
 );
 double WINAPI xll_math_pow(double x, double y)
 {
@@ -651,7 +651,7 @@ AddIn xai_remainder(
 	})
 	.FunctionHelp("Computes the remainder of the quotient of two floating-point values, rounded to the nearest integral value.")
 	.Category("MATH")
-	.HelpTopic("https://github.com/MicrosoftDocs/cpp-docs/blob/master/docs/c-runtime-library/reference/remainder-remainderf-remainderl.md")
+	.HelpTopic("https://docs.microsoft.com/en-us/cpp/c-runtime-library/reference/remainder-remainderf-remainderl")
 );
 double WINAPI xll_math_remainder(double x, double y)
 {
@@ -669,7 +669,7 @@ AddIn xai_remquo(
 	})
 	.FunctionHelp("Computes the remainder of two integer values, and stores an integer value with the sign and approximate magnitude of the quotient in a location that's specified in a parameter.")
 	.Category("MATH")
-	.HelpTopic("https://github.com/MicrosoftDocs/cpp-docs/blob/master/docs/c-runtime-library/reference/remquo-remquof-remquol.md")
+	.HelpTopic("https://docs.microsoft.com/en-us/cpp/c-runtime-library/reference/remquo-remquof-remquol")
 );
 double WINAPI xll_math_remquo(double numer, double denom, int* quo)
 {
@@ -685,7 +685,7 @@ AddIn xai_rint(
 	})
 	.FunctionHelp("Rounds a floating-point value to the nearest integer in floating-point format.")
 	.Category("MATH")
-	.HelpTopic("https://github.com/MicrosoftDocs/cpp-docs/blob/master/docs/c-runtime-library/reference/rint-rintf-rintl.md")
+	.HelpTopic("https://docs.microsoft.com/en-us/cpp/c-runtime-library/reference/rint-rintf-rintl")
 );
 double WINAPI xll_math_rint(double x)
 {
@@ -702,7 +702,7 @@ AddIn xai__rotl(
 	})
 	.FunctionHelp("Rotates bits to the left (_rotl) or right (_rotr).")
 	.Category("MATH")
-	.HelpTopic("https://github.com/MicrosoftDocs/cpp-docs/blob/master/docs/c-runtime-library/reference/rotl-rotl64-rotr-rotr64.md")
+	.HelpTopic("https://docs.microsoft.com/en-us/cpp/c-runtime-library/reference/rotl-rotl64-rotr-rotr64")
 );
 unsigned int WINAPI xll_math__rotl(unsigned int value, int shift)
 {
@@ -716,9 +716,9 @@ AddIn xai_round(
 	.Args({
 		Arg(XLL_DOUBLE, "x", "The floating-point value to round.")
 	})
-	.FunctionHelp("Rounds a floating-point value to the nearest integer.")
+	.FunctionHelp("Rounds a floating-point value to the nearest integer value.")
 	.Category("MATH")
-	.HelpTopic("https://github.com/MicrosoftDocs/cpp-docs/blob/master/docs/c-runtime-library/reference/round-roundf-roundl.md")
+	.HelpTopic("https://docs.microsoft.com/en-us/cpp/c-runtime-library/reference/round-roundf-roundl")
 );
 double WINAPI xll_math_round(double x)
 {
@@ -735,7 +735,7 @@ AddIn xai__scalb(
 	})
 	.FunctionHelp("Scales argument by a power of 2.")
 	.Category("MATH")
-	.HelpTopic("https://github.com/MicrosoftDocs/cpp-docs/blob/master/docs/c-runtime-library/reference/scalb.md")
+	.HelpTopic("https://docs.microsoft.com/en-us/cpp/c-runtime-library/reference/scalb")
 );
 double WINAPI xll_math__scalb(double x, long exp)
 {
@@ -752,7 +752,7 @@ AddIn xai_scalbn(
 	})
 	.FunctionHelp("Multiplies a floating-point number by an integral power of FLT_RADIX.")
 	.Category("MATH")
-	.HelpTopic("https://github.com/MicrosoftDocs/cpp-docs/blob/master/docs/c-runtime-library/reference/scalbn-scalbnf-scalbnl-scalbln-scalblnf-scalblnl.md")
+	.HelpTopic("https://docs.microsoft.com/en-us/cpp/c-runtime-library/reference/scalbn-scalbnf-scalbnl-scalbln-scalblnf-scalblnl")
 );
 double WINAPI xll_math_scalbn(double x, int exp)
 {
@@ -768,7 +768,7 @@ AddIn xai_sin(
 	})
 	.FunctionHelp("Calculates the sine of a floating-point value.")
 	.Category("MATH")
-	.HelpTopic("https://github.com/MicrosoftDocs/cpp-docs/blob/master/docs/c-runtime-library/reference/sin-sinf-sinl.md")
+	.HelpTopic("https://docs.microsoft.com/en-us/cpp/c-runtime-library/reference/sin-sinf-sinl")
 );
 double WINAPI xll_math_sin(double x)
 {
@@ -784,7 +784,7 @@ AddIn xai_sinh(
 	})
 	.FunctionHelp("Calculates the hyperbolic sine.")
 	.Category("MATH")
-	.HelpTopic("https://github.com/MicrosoftDocs/cpp-docs/blob/master/docs/c-runtime-library/reference/sinh-sinhf-sinhl.md")
+	.HelpTopic("https://docs.microsoft.com/en-us/cpp/c-runtime-library/reference/sinh-sinhf-sinhl")
 );
 double WINAPI xll_math_sinh(double x)
 {
@@ -800,7 +800,7 @@ AddIn xai_sqrt(
 	})
 	.FunctionHelp("Calculates the square root.")
 	.Category("MATH")
-	.HelpTopic("https://github.com/MicrosoftDocs/cpp-docs/blob/master/docs/c-runtime-library/reference/sqrt-sqrtf-sqrtl.md")
+	.HelpTopic("https://docs.microsoft.com/en-us/cpp/c-runtime-library/reference/sqrt-sqrtf-sqrtl")
 );
 double WINAPI xll_math_sqrt(double x)
 {
@@ -816,7 +816,7 @@ AddIn xai_tan(
 	})
 	.FunctionHelp("Calculates the tangent.")
 	.Category("MATH")
-	.HelpTopic("https://github.com/MicrosoftDocs/cpp-docs/blob/master/docs/c-runtime-library/reference/tan-tanf-tanl.md")
+	.HelpTopic("https://docs.microsoft.com/en-us/cpp/c-runtime-library/reference/tan-tanf-tanl")
 );
 double WINAPI xll_math_tan(double x)
 {
@@ -832,7 +832,7 @@ AddIn xai_tanh(
 	})
 	.FunctionHelp("Calculates the hyperbolic tangent.")
 	.Category("MATH")
-	.HelpTopic("https://github.com/MicrosoftDocs/cpp-docs/blob/master/docs/c-runtime-library/reference/tanh-tanhf-tanhl.md")
+	.HelpTopic("https://docs.microsoft.com/en-us/cpp/c-runtime-library/reference/tanh-tanhf-tanhl")
 );
 double WINAPI xll_math_tanh(double x)
 {
@@ -848,7 +848,7 @@ AddIn xai_tgamma(
 	})
 	.FunctionHelp("Determines the gamma function of the specified value.")
 	.Category("MATH")
-	.HelpTopic("https://github.com/MicrosoftDocs/cpp-docs/blob/master/docs/c-runtime-library/reference/tgamma-tgammaf-tgammal.md")
+	.HelpTopic("https://docs.microsoft.com/en-us/cpp/c-runtime-library/reference/tgamma-tgammaf-tgammal")
 );
 double WINAPI xll_math_tgamma(double x)
 {
@@ -864,7 +864,7 @@ AddIn xai_trunc(
 	})
 	.FunctionHelp("Determines the nearest integer that is less than or equal to the specified floating-point value.")
 	.Category("MATH")
-	.HelpTopic("https://github.com/MicrosoftDocs/cpp-docs/blob/master/docs/c-runtime-library/reference/trunc-truncf-truncl.md")
+	.HelpTopic("https://docs.microsoft.com/en-us/cpp/c-runtime-library/reference/trunc-truncf-truncl")
 );
 double WINAPI xll_math_trunc(double x)
 {
@@ -880,7 +880,7 @@ AddIn xai__j0(
 	})
 	.FunctionHelp("Computes the Bessel function of the first or second kind, of orders 0, 1, or n. The Bessel functions are commonly used in the mathematics of electromagnetic wave theory.")
 	.Category("MATH")
-	.HelpTopic("https://github.com/MicrosoftDocs/cpp-docs/blob/master/docs/c-runtime-library/reference/bessel-functions-j0-j1-jn-y0-y1-yn.md")
+	.HelpTopic("https://docs.microsoft.com/en-us/cpp/c-runtime-library/reference/bessel-functions-j0-j1-jn-y0-y1-yn")
 );
 double WINAPI xll_math__j0(double x)
 {
