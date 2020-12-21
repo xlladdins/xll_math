@@ -33,6 +33,11 @@ def xll_prolog(cat):
 #include "xll/xll/xll.h"
 
 using namespace xll;
+
+#ifdef _DEBUG
+Auto<OpenAfter> aoa_doc([]() { return Document("XLL_MATH"); });
+#endif
+
 	'''
 
 def add_in(cdecl, params, help, cat, url):
