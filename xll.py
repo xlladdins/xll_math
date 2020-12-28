@@ -27,16 +27,14 @@ xll_type = {
 
 def xll_prolog(cat):
 	return f'''// xll_{cat.lower()}.cpp - Excel add-in for functions in the {cat} category.
-// Uncomment to build for pre 2007 Excel
-//#define XLOPERX XLOPER
 #include <cmath>
 #include "xll/xll/xll.h"
 
 using namespace xll;
 
-#ifdef _DEBUG
-Auto<OpenAfter> aoa_doc([]() { return Document("XLL_MATH"); });
-#endif
+int xll_math_doc = Documentation("CMATH", R"(
+This add-in calls functions from the &lt;cmath&gt; library.
+)");
 
 	'''
 
@@ -44,20 +42,21 @@ def add_in(cdecl, params, help, cat, url):
 	sep = ',\n\t\t'
 	ret = xll_type[cdecl["ret"]]
 	fun = cdecl["fun"]
+	FUN = fun.upper();
 	cat = cat.lower()
 	CAT = cat.upper()
 	args = cdecl["arg"]
 	Arg = ['Arg(' + xll_type[arg[0]] + ', "' + arg[1] + '", "' + params[arg[1]] + '")' for arg in cdecl["arg"]]
-	return f'''AddIn xai_{"fun"}(
-	Function({ret}, "xll_{cat}_{fun}", "{CAT}.{fun.upper()}")
+	return f'''AddIn xai_{cat}_{fun}(
+	Function({ret}, "xll_{cat}_{fun}", "{CAT}.{FUN}")
 	.Args({{
-		{sep.join(Arg)]
+		{sep.join(Arg)}
 	}})
 	.FunctionHelp("{help}")
 	.Category("{CAT}")
 	.HelpTopic("{url}")
 );
-{cdecl["ret"]} WINAPI xll_{cat.lower()}_{cdecl["fun"]}({cdecl["sig"]})
+{cdecl["ret"]} WINAPI xll_{cat}_{fun}({cdecl["sig"]})
 {{
 #pragma XLLEXPORT
 
