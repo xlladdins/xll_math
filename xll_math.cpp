@@ -4,8 +4,8 @@
 
 using namespace xll;
 
-int xll_math_doc = Documentation("CMATH", R"(
-This add-in calls functions from the &lt;cmath&gt; library.
+int xll_math_doc = Documentation("MATH", R"(
+This add-in calls functions declared in the <math.h> header.
 )");
 
 	

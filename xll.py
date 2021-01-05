@@ -33,7 +33,7 @@ def xll_prolog(cat):
 using namespace xll;
 
 int xll_math_doc = Documentation("CMATH", R"(
-This add-in calls functions from the &lt;cmath&gt; library.
+This add-in calls functions declared in the <math.h> header.
 )");
 
 	'''
