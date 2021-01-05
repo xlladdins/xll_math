@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 # Generate C++ files to be used with the xll library
 from cdecl import ccall, cdecl
-from ms_cpp_docs import page_html, hrefs, section_function_help, section_syntax, section_parameters
+from ms_cpp_docs import page_html, hrefs, section_function_help, section_syntax, section_parameters, section_function_desc
 
 docs_url = 'https://docs.microsoft.com/en-us/cpp/c-runtime-library/reference/' 
 git_url = 'https://github.com/MicrosoftDocs/cpp-docs/blob/master/docs/c-runtime-library/reference/'
@@ -38,7 +38,7 @@ This add-in calls functions from the &lt;cmath&gt; library.
 
 	'''
 
-def add_in(cdecl, params, help, cat, url):
+def add_in(cdecl, params, help, cat, url, desc):
 	sep = ',\n\t\t'
 	ret = xll_type[cdecl["ret"]]
 	fun = cdecl["fun"]
@@ -55,6 +55,7 @@ def add_in(cdecl, params, help, cat, url):
 	.FunctionHelp("{help}")
 	.Category("{CAT}")
 	.HelpTopic("{url}")
+	.Documentation(R"xyzyx({desc})xyzyx")
 );
 {cdecl["ret"]} WINAPI xll_{cat}_{fun}({cdecl["sig"]})
 {{
@@ -96,4 +97,5 @@ if __name__ == '__main__':
 		params = section_parameters(page)
 		#print(params)
 		help = section_function_help(page)
-		print(add_in(decl, params, help, cat, docs_url + href))
+		desc = section_function_desc(page)
+		print(add_in(decl, params, help, cat, docs_url + href, desc))

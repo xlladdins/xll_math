@@ -84,6 +84,16 @@ def test_section_function_help(url):
 	ret = section_function_help(page)
 	print(ret)
 
+def section_function_desc(page):
+	xdesc = '//*[@id="user-content-return-value"]/parent::h2/following::p[1]'
+	desc = page.xpath(xdesc)
+
+	return ''.join(desc[0].itertext())
+
+def test_section_function_desc(page):
+	ret = section_function_desc(page)
+	print(ret)
+
 # array of all function declarations
 def section_syntax(page):
 	xsyntax = '//*[@href="#syntax"]/parent::h2/following::div[1]'
@@ -133,9 +143,10 @@ if __name__ == '__main__':
 
 	#test_section_function_help()
 	#test_section_syntax(test_url)
-	test_section_parameters(test_url)
+	#test_section_parameters(test_url)
 
-	#page = page_html(test_url)
+	page = page_html(test_url)
+	test_section_function_desc(page)
 	#x = section_parameters(page)
 	#print(x)
 	#print(etree.tostring(page, pretty_print=True).decode('utf-8'))
