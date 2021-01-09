@@ -1,0 +1,8 @@
+﻿  xll_math.cpp
+xll.lib(spreadsheet.obj) : warning LNK4197: export '_xll_spreadsheet@0' specified multiple times; using first specification
+     Creating library C:\Users\kalx\source\repos\xlladdins\xll_math\Release\xll_math86.lib and object C:\Users\kalx\source\repos\xlladdins\xll_math\Release\xll_math86.exp
+  Generating code
+  Previous IPDB not found, fall back to full compilation.
+  All 1252 functions were compiled because no usable IPDB/IOBJ from previous compilation was found.
+  Finished generating code
+  xll_math.vcxproj -> C:\Users\kalx\source\repos\xlladdins\xll_math\Release\xll_math86.xll
