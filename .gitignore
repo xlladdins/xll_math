@@ -37,3 +37,4 @@
 /__pycache__
 /.Makefile.swp
 /x64/Release
+/Release

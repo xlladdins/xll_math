@@ -4,14 +4,18 @@
 
 using namespace xll;
 
-int xll_math_doc = Documentation("MATH", R"(
+#ifdef _DEBUG
+Auto<OpenAfter> xaoa_math_doc([]() {
+	return Documentation("MATH", R"(
 This add-in calls functions declared in the <math.h> header.
 )");
+});
+#endif // _DEBUG
 
 	
 AddIn xai_math_abs(
 	Function(XLL_LONG, "xll_math_abs", "MATH.ABS")
-	.Args({
+	.Arguments({
 		Arg(XLL_LONG, "n", "Numeric value.")
 	})
 	.FunctionHelp("Calculates the absolute value of the argument.")
@@ -28,7 +32,7 @@ int WINAPI xll_math_abs(int n)
 	
 AddIn xai_math_acos(
 	Function(XLL_DOUBLE, "xll_math_acos", "MATH.ACOS")
-	.Args({
+	.Arguments({
 		Arg(XLL_DOUBLE, "x", "Value between -1 and 1, for which to calculate the arccosine (the inverse cosine).")
 	})
 	.FunctionHelp("Calculates the arccosine.")
@@ -45,7 +49,7 @@ double WINAPI xll_math_acos(double x)
 	
 AddIn xai_math_acosh(
 	Function(XLL_DOUBLE, "xll_math_acosh", "MATH.ACOSH")
-	.Args({
+	.Arguments({
 		Arg(XLL_DOUBLE, "x", "Floating-point value.")
 	})
 	.FunctionHelp("Calculates the inverse hyperbolic cosine.")
@@ -62,7 +66,7 @@ double WINAPI xll_math_acosh(double x)
 	
 AddIn xai_math_asin(
 	Function(XLL_DOUBLE, "xll_math_asin", "MATH.ASIN")
-	.Args({
+	.Arguments({
 		Arg(XLL_DOUBLE, "x", "Value whose arcsine is to be calculated.")
 	})
 	.FunctionHelp("Calculates the arcsine.")
@@ -79,7 +83,7 @@ double WINAPI xll_math_asin(double x)
 	
 AddIn xai_math_asinh(
 	Function(XLL_DOUBLE, "xll_math_asinh", "MATH.ASINH")
-	.Args({
+	.Arguments({
 		Arg(XLL_DOUBLE, "x", "Floating-point value.")
 	})
 	.FunctionHelp("Calculates the inverse hyperbolic sine.")
@@ -96,7 +100,7 @@ double WINAPI xll_math_asinh(double x)
 	
 AddIn xai_math_atan(
 	Function(XLL_DOUBLE, "xll_math_atan", "MATH.ATAN")
-	.Args({
+	.Arguments({
 		Arg(XLL_DOUBLE, "x", "Any numbers.")
 	})
 	.FunctionHelp("Calculates the arctangent of x (atan, atanf, and atanl) or the arctangent of y/x (atan2, atan2f, and atan2l).")
@@ -113,7 +117,7 @@ double WINAPI xll_math_atan(double x)
 	
 AddIn xai_math_atanh(
 	Function(XLL_DOUBLE, "xll_math_atanh", "MATH.ATANH")
-	.Args({
+	.Arguments({
 		Arg(XLL_DOUBLE, "x", "Floating-point value.")
 	})
 	.FunctionHelp("Calculates the inverse hyperbolic tangent.")
@@ -130,7 +134,7 @@ double WINAPI xll_math_atanh(double x)
 	
 AddIn xai_math_cbrt(
 	Function(XLL_DOUBLE, "xll_math_cbrt", "MATH.CBRT")
-	.Args({
+	.Arguments({
 		Arg(XLL_DOUBLE, "x", "Floating-point value")
 	})
 	.FunctionHelp("Calculates the cube root.")
@@ -147,7 +151,7 @@ double WINAPI xll_math_cbrt(double x)
 	
 AddIn xai_math_ceil(
 	Function(XLL_DOUBLE, "xll_math_ceil", "MATH.CEIL")
-	.Args({
+	.Arguments({
 		Arg(XLL_DOUBLE, "x", "Floating-point value.")
 	})
 	.FunctionHelp("Calculates the ceiling of a value.")
@@ -164,7 +168,7 @@ double WINAPI xll_math_ceil(double x)
 	
 AddIn xai_math__chgsign(
 	Function(XLL_DOUBLE, "xll_math__chgsign", "MATH._CHGSIGN")
-	.Args({
+	.Arguments({
 		Arg(XLL_DOUBLE, "x", "The floating-point value to be changed.")
 	})
 	.FunctionHelp("Reverses the sign of a floating-point argument.")
@@ -181,7 +185,7 @@ double WINAPI xll_math__chgsign(double x)
 	
 AddIn xai_math_copysign(
 	Function(XLL_DOUBLE, "xll_math_copysign", "MATH.COPYSIGN")
-	.Args({
+	.Arguments({
 		Arg(XLL_DOUBLE, "x", "The floating-point value that's returned as the magnitude of the result."),
 		Arg(XLL_DOUBLE, "y", "The floating-point value that's returned as the sign of the result.")
 	})
@@ -199,7 +203,7 @@ double WINAPI xll_math_copysign(double x, double y)
 	
 AddIn xai_math_cos(
 	Function(XLL_DOUBLE, "xll_math_cos", "MATH.COS")
-	.Args({
+	.Arguments({
 		Arg(XLL_DOUBLE, "x", "Angle in radians.")
 	})
 	.FunctionHelp("Calculates the cosine.")
@@ -216,7 +220,7 @@ double WINAPI xll_math_cos(double x)
 	
 AddIn xai_math_cosh(
 	Function(XLL_DOUBLE, "xll_math_cosh", "MATH.COSH")
-	.Args({
+	.Arguments({
 		Arg(XLL_DOUBLE, "x", "Angle in radians.")
 	})
 	.FunctionHelp("Calculates the hyperbolic cosine.")
@@ -233,7 +237,7 @@ double WINAPI xll_math_cosh(double x)
 	
 AddIn xai_math_erf(
 	Function(XLL_DOUBLE, "xll_math_erf", "MATH.ERF")
-	.Args({
+	.Arguments({
 		Arg(XLL_DOUBLE, "x", "A floating-point value.")
 	})
 	.FunctionHelp("Computes the error function or the complementary error function of a value.")
@@ -250,7 +254,7 @@ double WINAPI xll_math_erf(double x)
 	
 AddIn xai_math_exp(
 	Function(XLL_DOUBLE, "xll_math_exp", "MATH.EXP")
-	.Args({
+	.Arguments({
 		Arg(XLL_DOUBLE, "x", "The floating-point value to exponentiate the natural logarithm base")
 	})
 	.FunctionHelp("Calculates the exponential.")
@@ -267,7 +271,7 @@ double WINAPI xll_math_exp(double x)
 	
 AddIn xai_math_exp2(
 	Function(XLL_DOUBLE, "xll_math_exp2", "MATH.EXP2")
-	.Args({
+	.Arguments({
 		Arg(XLL_DOUBLE, "x", "The value of the exponent.")
 	})
 	.FunctionHelp("Computes 2 raised to the specified value.")
@@ -284,7 +288,7 @@ double WINAPI xll_math_exp2(double x)
 	
 AddIn xai_math_expm1(
 	Function(XLL_DOUBLE, "xll_math_expm1", "MATH.EXPM1")
-	.Args({
+	.Arguments({
 		Arg(XLL_DOUBLE, "x", "The floating-point exponential value.")
 	})
 	.FunctionHelp("Computes the base-e exponential of a value, minus one.")
@@ -301,7 +305,7 @@ double WINAPI xll_math_expm1(double x)
 	
 AddIn xai_math_fabs(
 	Function(XLL_DOUBLE, "xll_math_fabs", "MATH.FABS")
-	.Args({
+	.Arguments({
 		Arg(XLL_DOUBLE, "x", "Floating-point value.")
 	})
 	.FunctionHelp("Calculates the absolute value of the floating-point argument.")
@@ -318,7 +322,7 @@ double WINAPI xll_math_fabs(double x)
 	
 AddIn xai_math_fdim(
 	Function(XLL_DOUBLE, "xll_math_fdim", "MATH.FDIM")
-	.Args({
+	.Arguments({
 		Arg(XLL_DOUBLE, "x", "The first value."),
 		Arg(XLL_DOUBLE, "y", "The second value.")
 	})
@@ -336,7 +340,7 @@ double WINAPI xll_math_fdim(double x, double y)
 	
 AddIn xai_math_floor(
 	Function(XLL_DOUBLE, "xll_math_floor", "MATH.FLOOR")
-	.Args({
+	.Arguments({
 		Arg(XLL_DOUBLE, "x", "Floating-point value.")
 	})
 	.FunctionHelp("Calculates the floor of a value.")
@@ -353,7 +357,7 @@ double WINAPI xll_math_floor(double x)
 	
 AddIn xai_math_fma(
 	Function(XLL_DOUBLE, "xll_math_fma", "MATH.FMA")
-	.Args({
+	.Arguments({
 		Arg(XLL_DOUBLE, "x", "The first value to multiply."),
 		Arg(XLL_DOUBLE, "y", "The second value to multiply."),
 		Arg(XLL_DOUBLE, "z", "The value to add.")
@@ -372,7 +376,7 @@ double WINAPI xll_math_fma(double x, double y, double z)
 	
 AddIn xai_math_fmax(
 	Function(XLL_DOUBLE, "xll_math_fmax", "MATH.FMAX")
-	.Args({
+	.Arguments({
 		Arg(XLL_DOUBLE, "x", "The first value to compare."),
 		Arg(XLL_DOUBLE, "y", "The second value to compare.")
 	})
@@ -390,7 +394,7 @@ double WINAPI xll_math_fmax(double x, double y)
 	
 AddIn xai_math_fmin(
 	Function(XLL_DOUBLE, "xll_math_fmin", "MATH.FMIN")
-	.Args({
+	.Arguments({
 		Arg(XLL_DOUBLE, "x", "The first value to compare."),
 		Arg(XLL_DOUBLE, "y", "The second value to compare.")
 	})
@@ -408,7 +412,7 @@ double WINAPI xll_math_fmin(double x, double y)
 	
 AddIn xai_math_fmod(
 	Function(XLL_DOUBLE, "xll_math_fmod", "MATH.FMOD")
-	.Args({
+	.Arguments({
 		Arg(XLL_DOUBLE, "x", "Floating-point values."),
 		Arg(XLL_DOUBLE, "y", "Floating-point values.")
 	})
@@ -426,7 +430,7 @@ double WINAPI xll_math_fmod(double x, double y)
 	
 AddIn xai_math__fpclass(
 	Function(XLL_LONG, "xll_math__fpclass", "MATH._FPCLASS")
-	.Args({
+	.Arguments({
 		Arg(XLL_DOUBLE, "x", "The floating-point value to test.")
 	})
 	.FunctionHelp("Returns a value indicating the floating-point classification of the argument.")
@@ -443,7 +447,7 @@ int WINAPI xll_math__fpclass(double x)
 	
 AddIn xai_math_frexp(
 	Function(XLL_DOUBLE, "xll_math_frexp", "MATH.FREXP")
-	.Args({
+	.Arguments({
 		Arg(XLL_DOUBLE, "x", "Floating-point value."),
 		Arg(XLL_LONG_, "expptr", "Pointer to stored integer exponent.")
 	})
@@ -461,7 +465,7 @@ double WINAPI xll_math_frexp(double x, int* expptr)
 	
 AddIn xai_math_hypot(
 	Function(XLL_DOUBLE, "xll_math_hypot", "MATH.HYPOT")
-	.Args({
+	.Arguments({
 		Arg(XLL_DOUBLE, "x", "Floating-point values."),
 		Arg(XLL_DOUBLE, "y", "Floating-point values.")
 	})
@@ -479,7 +483,7 @@ double WINAPI xll_math_hypot(double x, double y)
 	
 AddIn xai_math_ilogb(
 	Function(XLL_LONG, "xll_math_ilogb", "MATH.ILOGB")
-	.Args({
+	.Arguments({
 		Arg(XLL_DOUBLE, "x", "The specified value.")
 	})
 	.FunctionHelp("Retrieves an integer that represents the unbiased base-2 exponent of the specified value.")
@@ -496,7 +500,7 @@ int WINAPI xll_math_ilogb(double x)
 	
 AddIn xai_math_ldexp(
 	Function(XLL_DOUBLE, "xll_math_ldexp", "MATH.LDEXP")
-	.Args({
+	.Arguments({
 		Arg(XLL_DOUBLE, "x", "Floating-point value."),
 		Arg(XLL_LONG, "exp", "Integer exponent.")
 	})
@@ -514,7 +518,7 @@ double WINAPI xll_math_ldexp(double x, int exp)
 	
 AddIn xai_math_lgamma(
 	Function(XLL_DOUBLE, "xll_math_lgamma", "MATH.LGAMMA")
-	.Args({
+	.Arguments({
 		Arg(XLL_DOUBLE, "x", "The value to compute.")
 	})
 	.FunctionHelp("Determines the natural logarithm of the absolute value of the gamma function of the specified value.")
@@ -531,7 +535,7 @@ double WINAPI xll_math_lgamma(double x)
 	
 AddIn xai_math_log(
 	Function(XLL_DOUBLE, "xll_math_log", "MATH.LOG")
-	.Args({
+	.Arguments({
 		Arg(XLL_DOUBLE, "x", "Value whose logarithm is to be found.")
 	})
 	.FunctionHelp("Calculates logarithms.")
@@ -548,7 +552,7 @@ double WINAPI xll_math_log(double x)
 	
 AddIn xai_math_log1p(
 	Function(XLL_DOUBLE, "xll_math_log1p", "MATH.LOG1P")
-	.Args({
+	.Arguments({
 		Arg(XLL_DOUBLE, "x", "The floating-point argument.")
 	})
 	.FunctionHelp("Computes the natural logarithm of 1 plus the specified value.")
@@ -565,7 +569,7 @@ double WINAPI xll_math_log1p(double x)
 	
 AddIn xai_math_log2(
 	Function(XLL_DOUBLE, "xll_math_log2", "MATH.LOG2")
-	.Args({
+	.Arguments({
 		Arg(XLL_DOUBLE, "x", "The value to determine the base-2 logarithm of.")
 	})
 	.FunctionHelp("Determines the binary (base-2) logarithm of the specified value.")
@@ -582,7 +586,7 @@ double WINAPI xll_math_log2(double x)
 	
 AddIn xai_math_logb(
 	Function(XLL_DOUBLE, "xll_math_logb", "MATH.LOGB")
-	.Args({
+	.Arguments({
 		Arg(XLL_DOUBLE, "x", "A floating-point value.")
 	})
 	.FunctionHelp("Extracts the exponent value of a floating-point argument.")
@@ -599,7 +603,7 @@ double WINAPI xll_math_logb(double x)
 	
 AddIn xai_math_modf(
 	Function(XLL_DOUBLE, "xll_math_modf", "MATH.MODF")
-	.Args({
+	.Arguments({
 		Arg(XLL_DOUBLE, "x", "Floating-point value."),
 		Arg(XLL_DOUBLE_, "intptr", "Pointer to stored integer portion.")
 	})
@@ -617,7 +621,7 @@ double WINAPI xll_math_modf(double x, double* intptr)
 	
 AddIn xai_math_nan(
 	Function(XLL_DOUBLE, "xll_math_nan", "MATH.NAN")
-	.Args({
+	.Arguments({
 		Arg(XLL_CSTRING, "input", "A string value.")
 	})
 	.FunctionHelp("Returns a quiet NaN value.")
@@ -634,7 +638,7 @@ double WINAPI xll_math_nan(const char* input)
 	
 AddIn xai_math_nearbyint(
 	Function(XLL_DOUBLE, "xll_math_nearbyint", "MATH.NEARBYINT")
-	.Args({
+	.Arguments({
 		Arg(XLL_DOUBLE, "x", "The value to round.")
 	})
 	.FunctionHelp("Rounds the specified floating-point value to an integer, and returns that value in a floating-point format.")
@@ -651,7 +655,7 @@ double WINAPI xll_math_nearbyint(double x)
 	
 AddIn xai_math_nextafter(
 	Function(XLL_DOUBLE, "xll_math_nextafter", "MATH.NEXTAFTER")
-	.Args({
+	.Arguments({
 		Arg(XLL_DOUBLE, "x", "The floating-point value to start from."),
 		Arg(XLL_DOUBLE, "y", "The floating-point value to go towards.")
 	})
@@ -669,7 +673,7 @@ double WINAPI xll_math_nextafter(double x, double y)
 	
 AddIn xai_math_pow(
 	Function(XLL_DOUBLE, "xll_math_pow", "MATH.POW")
-	.Args({
+	.Arguments({
 		Arg(XLL_DOUBLE, "x", "Base."),
 		Arg(XLL_DOUBLE, "y", "Exponent.")
 	})
@@ -687,7 +691,7 @@ double WINAPI xll_math_pow(double x, double y)
 	
 AddIn xai_math_remainder(
 	Function(XLL_DOUBLE, "xll_math_remainder", "MATH.REMAINDER")
-	.Args({
+	.Arguments({
 		Arg(XLL_DOUBLE, "x", "The numerator."),
 		Arg(XLL_DOUBLE, "y", "The denominator.")
 	})
@@ -705,7 +709,7 @@ double WINAPI xll_math_remainder(double x, double y)
 	
 AddIn xai_math_remquo(
 	Function(XLL_DOUBLE, "xll_math_remquo", "MATH.REMQUO")
-	.Args({
+	.Arguments({
 		Arg(XLL_DOUBLE, "numer", "The numerator."),
 		Arg(XLL_DOUBLE, "denom", "The denominator."),
 		Arg(XLL_LONG_, "quo", "A pointer to an integer to store a value that has the sign and approximate magnitude of the quotient.")
@@ -724,7 +728,7 @@ double WINAPI xll_math_remquo(double numer, double denom, int* quo)
 	
 AddIn xai_math_rint(
 	Function(XLL_DOUBLE, "xll_math_rint", "MATH.RINT")
-	.Args({
+	.Arguments({
 		Arg(XLL_DOUBLE, "x", "The floating-point value to round.")
 	})
 	.FunctionHelp("Rounds a floating-point value to the nearest integer in floating-point format.")
@@ -741,7 +745,7 @@ double WINAPI xll_math_rint(double x)
 	
 AddIn xai_math__rotl(
 	Function(XLL_LONG, "xll_math__rotl", "MATH._ROTL")
-	.Args({
+	.Arguments({
 		Arg(XLL_LONG, "value", "Value to be rotated."),
 		Arg(XLL_LONG, "shift", "Number of bits to shift.")
 	})
@@ -759,7 +763,7 @@ unsigned int WINAPI xll_math__rotl(unsigned int value, int shift)
 	
 AddIn xai_math_round(
 	Function(XLL_DOUBLE, "xll_math_round", "MATH.ROUND")
-	.Args({
+	.Arguments({
 		Arg(XLL_DOUBLE, "x", "The floating-point value to round.")
 	})
 	.FunctionHelp("Rounds a floating-point value to the nearest integer value.")
@@ -776,7 +780,7 @@ double WINAPI xll_math_round(double x)
 	
 AddIn xai_math__scalb(
 	Function(XLL_DOUBLE, "xll_math__scalb", "MATH._SCALB")
-	.Args({
+	.Arguments({
 		Arg(XLL_DOUBLE, "x", "Double-precision, floating-point value."),
 		Arg(XLL_LONG, "exp", "Long integer exponent.")
 	})
@@ -794,7 +798,7 @@ double WINAPI xll_math__scalb(double x, long exp)
 	
 AddIn xai_math_scalbn(
 	Function(XLL_DOUBLE, "xll_math_scalbn", "MATH.SCALBN")
-	.Args({
+	.Arguments({
 		Arg(XLL_DOUBLE, "x", "Floating-point value."),
 		Arg(XLL_LONG, "exp", "Integer exponent.")
 	})
@@ -812,7 +816,7 @@ double WINAPI xll_math_scalbn(double x, int exp)
 	
 AddIn xai_math_sin(
 	Function(XLL_DOUBLE, "xll_math_sin", "MATH.SIN")
-	.Args({
+	.Arguments({
 		Arg(XLL_DOUBLE, "x", "Angle in radians.")
 	})
 	.FunctionHelp("Calculates the sine of a floating-point value.")
@@ -829,7 +833,7 @@ double WINAPI xll_math_sin(double x)
 	
 AddIn xai_math_sinh(
 	Function(XLL_DOUBLE, "xll_math_sinh", "MATH.SINH")
-	.Args({
+	.Arguments({
 		Arg(XLL_DOUBLE, "x", "Angle in radians.")
 	})
 	.FunctionHelp("Calculates the hyperbolic sine.")
@@ -846,7 +850,7 @@ double WINAPI xll_math_sinh(double x)
 	
 AddIn xai_math_sqrt(
 	Function(XLL_DOUBLE, "xll_math_sqrt", "MATH.SQRT")
-	.Args({
+	.Arguments({
 		Arg(XLL_DOUBLE, "x", "Non-negative floating-point value")
 	})
 	.FunctionHelp("Calculates the square root.")
@@ -863,7 +867,7 @@ double WINAPI xll_math_sqrt(double x)
 	
 AddIn xai_math_tan(
 	Function(XLL_DOUBLE, "xll_math_tan", "MATH.TAN")
-	.Args({
+	.Arguments({
 		Arg(XLL_DOUBLE, "x", "Angle in radians.")
 	})
 	.FunctionHelp("Calculates the tangent.")
@@ -880,7 +884,7 @@ double WINAPI xll_math_tan(double x)
 	
 AddIn xai_math_tanh(
 	Function(XLL_DOUBLE, "xll_math_tanh", "MATH.TANH")
-	.Args({
+	.Arguments({
 		Arg(XLL_DOUBLE, "x", "Angle in radians.")
 	})
 	.FunctionHelp("Calculates the hyperbolic tangent.")
@@ -897,7 +901,7 @@ double WINAPI xll_math_tanh(double x)
 	
 AddIn xai_math_tgamma(
 	Function(XLL_DOUBLE, "xll_math_tgamma", "MATH.TGAMMA")
-	.Args({
+	.Arguments({
 		Arg(XLL_DOUBLE, "x", "The value to find the gamma of.")
 	})
 	.FunctionHelp("Determines the gamma function of the specified value.")
@@ -914,7 +918,7 @@ double WINAPI xll_math_tgamma(double x)
 	
 AddIn xai_math_trunc(
 	Function(XLL_DOUBLE, "xll_math_trunc", "MATH.TRUNC")
-	.Args({
+	.Arguments({
 		Arg(XLL_DOUBLE, "x", "The value to truncate.")
 	})
 	.FunctionHelp("Determines the nearest integer that is less than or equal to the specified floating-point value.")
@@ -931,7 +935,7 @@ double WINAPI xll_math_trunc(double x)
 	
 AddIn xai_math__j0(
 	Function(XLL_DOUBLE, "xll_math__j0", "MATH._J0")
-	.Args({
+	.Arguments({
 		Arg(XLL_DOUBLE, "x", "Floating-point value.")
 	})
 	.FunctionHelp("Computes the Bessel function of the first or second kind, of orders 0, 1, or n. The Bessel functions are commonly used in the mathematics of electromagnetic wave theory.")

@@ -32,9 +32,13 @@ def xll_prolog(cat):
 
 using namespace xll;
 
-int xll_math_doc = Documentation("CMATH", R"(
-This add-in calls functions declared in the <math.h> header.
-)");
+#ifdef _DEBUG
+Auto<OpenAfter> xaoa_math_doc([]() {
+	return Documentation("MATH", R"(
+	This add-in calls functions declared in the <math.h> header.
+	)");
+});
+#endif // _DEBUG
 
 	'''
 
@@ -46,7 +50,7 @@ def add_in(cdecl, params, help, cat, url, desc):
 	cat = cat.lower()
 	CAT = cat.upper()
 	args = cdecl["arg"]
-	Arg = ['Arg(' + xll_type[arg[0]] + ', "' + arg[1] + '", "' + params[arg[1]] + '")' for arg in cdecl["arg"]]
+	Arg = ['Arguments(' + xll_type[arg[0]] + ', "' + arg[1] + '", "' + params[arg[1]] + '")' for arg in cdecl["arg"]]
 	return f'''AddIn xai_{cat}_{fun}(
 	Function({ret}, "xll_{cat}_{fun}", "{CAT}.{FUN}")
 	.Args({{
