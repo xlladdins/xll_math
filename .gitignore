@@ -38,3 +38,4 @@
 /.Makefile.swp
 /x64/Release
 /Release
+/install.cpp
